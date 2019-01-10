@@ -30,8 +30,10 @@ public class UserController {
 
     @RequestMapping(value = "/save" ,method = {RequestMethod.GET,RequestMethod.POST})
     public int save(HttpServletRequest request, HttpServletResponse response){
+        String id = request.getParameter("id");
         String name = request.getParameter("name");
         Map<String,String> param = new HashMap<>();
+        param.put("id",id);
         param.put("name",name);
         return userService.insertUser(param);
     }

@@ -5,9 +5,9 @@
 
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" parameterType="map">
         insert into t_user
-        (name)
+        (id,name)
         values
-        (#{name})
+        (#{id},#{name})
     </insert>
 
 
