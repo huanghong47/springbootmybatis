@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hhfarcry.springbootmybatis.example.dao.ResourceDao">
+    <sql id="allcolumn">
+        uuid
+        ,is_deleted
+        ,status
+        ,comment
+        ,create_user_uuid
+        ,create_time
+        ,update_user_uuid
+        ,update_time
+        ,resource_name
+        ,resource_type
+        ,resource_url
+    </sql>
+
+    <sql id="allcolumn2">
+        #{uuid}
+        ,#{isDeleted}
+        ,#{status}
+        ,#{comment}
+        ,#{createUserUuid}
+        ,#{createTime}
+        ,#{updateUserUuid}
+        ,#{updateTime}
+        ,#{resourceName}
+        ,#{resourceType}
+        ,#{resourceUrl}
+    </sql>
+
+    <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity" parameterType="map">
+        select id,<include refid="allcolumn"></include>
+        from t_resource
+        <where>
+            <if test=" uuid != null and uuid != '' ">
+                and uuid = #{uuid}
+            </if>
+            <if test=" status != null and status != '' ">
+                and status = #{status}
+            </if>
+            <if test=" name != null and name != '' ">
+                and resource_name = #{resourceName}
+            </if>
+            <!--<if test=" name != null and name != '' ">-->
+                <!--and name  like CONCAT('%' , #{name} , '%')-->
+            <!--</if>-->
+        </where>
+    </select>
+
+
+    <insert id="insertOrUpdateByEntity" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity">
+        insert into t_resource
+        (uuid
+        ,is_deleted
+        ,status
+        ,comment
+        ,create_user_uuid
+        ,create_time
+        ,resource_name
+        ,resource_type
+        ,resource_url)
+        values
+        (#{uuid}
+        ,#{isDeleted}
+        ,#{status}
+        ,#{comment}
+        ,#{createUserUuid}
+        ,#{createTime}
+        ,#{resourceName}
+        ,#{resourceType}
+        ,#{resourceUrl})
+        on duplicate key update
+        update_user_uuid = #{updateUserUuid}
+        ,update_time = current_timestamp
+    </insert>
+
+</mapper>

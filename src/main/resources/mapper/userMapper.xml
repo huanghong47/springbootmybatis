@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hhfarcry.springbootmybatis.example.dao.UserDao">
+    <sql id="allcolumn">
+        uuid
+        ,is_deleted
+        ,status
+        ,comment
+        ,create_user_uuid
+        ,create_time
+        ,update_user_uuid
+        ,update_time
+        ,user_name
+        ,password
+    </sql>
+
+    <sql id="allcolumn2">
+        #{uuid}
+        ,#{isDeleted}
+        ,#{status}
+        ,#{comment}
+        ,#{createUserUuid}
+        ,#{createTime}
+        ,#{updateUserUuid}
+        ,#{updateTime}
+        ,#{userName}
+        ,#{password}
+    </sql>
+
+    <insert id="insertOrUpdateByEntity" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.example.entity.UserEntity">
+        insert into t_user
+        (uuid
+        ,is_deleted
+        ,status
+        ,comment
+        ,create_user_uuid
+        ,create_time
+        ,user_name
+        ,password)
+        values
+        (#{uuid}
+        ,#{isDeleted}
+        ,#{status}
+        ,#{comment}
+        ,#{createUserUuid}
+        ,#{createTime}
+        ,#{userName}
+        ,#{password})
+        on duplicate key update
+        update_user_uuid = #{updateUserUuid}
+        ,update_time = current_timestamp
+    </insert>
+
+    <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.example.entity.UserEntity" parameterType="map">
+        select id,<include refid="allcolumn"></include>
+        from t_user
+        <where>
+                and is_deleted = 0
+            <if test=" uuid != null and uuid != '' ">
+                and uuid = #{uuid}
+            </if>
+            <if test=" status != null and status != '' ">
+                and status = #{status}
+            </if>
+            <if test=" userName != null and userName != '' ">
+                and user_name = #{userName}
+            </if>
+            <!--<if test=" name != null and name != '' ">-->
+                <!--and name  like CONCAT('%' , #{name} , '%')-->
+            <!--</if>-->
+        </where>
+    </select>
+</mapper>

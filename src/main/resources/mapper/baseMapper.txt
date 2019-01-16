@@ -1,0 +1,66 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+
+<!--<mapper namespace="UserDao">-->
+    <!--<sql id="allcolumn">-->
+        <!--uuid-->
+        <!--,status-->
+        <!--,comment-->
+        <!--,create_user_uuid-->
+        <!--,create_time-->
+        <!--,update_user_uuid-->
+        <!--,update_time-->
+        <!--,name-->
+    <!--</sql>-->
+
+    <!--<sql id="allcolumn2">-->
+        <!--#{uuid}-->
+        <!--,#{status}-->
+        <!--,#{comment}-->
+        <!--,#{createUserUuid}-->
+        <!--,#{createTime}-->
+        <!--,#{updateUserUuid}-->
+        <!--,#{updateTime}-->
+        <!--,#{name}-->
+    <!--</sql>-->
+
+    <!--<select id="selectByEntity" resultType="list" parameterType="map">-->
+        <!--select <include refid="allcolumn"></include>-->
+        <!--from t_user-->
+        <!--<where>-->
+            <!--<if test=" uuid != null and uuid != '' ">-->
+                <!--and uuid = #{uuid}-->
+            <!--</if>-->
+            <!--<if test=" status != null and status != '' ">-->
+                <!--and status = #{status}-->
+            <!--</if>-->
+            <!--<if test=" name != null and name != '' ">-->
+                <!--and name = #{name}-->
+            <!--</if>-->
+            <!--&lt;!&ndash;<if test=" name != null and name != '' ">&ndash;&gt;-->
+            <!--&lt;!&ndash;and name  like CONCAT('%' , #{name} , '%')&ndash;&gt;-->
+            <!--&lt;!&ndash;</if>&ndash;&gt;-->
+        <!--</where>-->
+    <!--</select>-->
+
+    <!--<insert id="insertOrUpdate" useGeneratedKeys="true" keyProperty="id" parameterType="map">-->
+        <!--insert into t_user-->
+        <!--(uuid-->
+        <!--,status-->
+        <!--,comment-->
+        <!--,create_user_uuid-->
+        <!--,create_time-->
+        <!--,name)-->
+        <!--values-->
+        <!--(#{uuid}-->
+        <!--,#{status}-->
+        <!--,#{comment}-->
+        <!--,#{createUserUuid}-->
+        <!--,#{createTime}-->
+        <!--,#{name})-->
+        <!--on duplicate key update-->
+        <!--update_user_uuid = #{updateUserUuid}-->
+        <!--,update_time = current_timestamp-->
+    <!--</insert>-->
+    <!---->
+<!--</mapper>-->

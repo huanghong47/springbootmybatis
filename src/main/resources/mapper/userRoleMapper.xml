@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hhfarcry.springbootmybatis.example.dao.UserRoleDao">
+    <sql id="allcolumn">
+        id
+        ,user_id
+        ,role_id
+    </sql>
+
+    <sql id="allcolumn2">
+        #{id}
+       ,#{userId}
+       ,#{roleId}
+    </sql>
+
+    <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.example.entity.UserRoleEntity" parameterType="map">
+        select <include refid="allcolumn"></include>
+        from t_user_role
+    </select>
+
+    <insert id="insertUserRole" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.example.entity.UserRoleEntity">
+        insert into t_user_role
+        (id
+        ,user_id
+        ,role_id)
+        values
+        (#{id}
+       ,#{userId}
+       ,#{roleId})
+    </insert>
+
+</mapper>
