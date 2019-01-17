@@ -2,6 +2,7 @@ package cn.hhfarcry.springbootmybatis.example.controller;
 
 import cn.hhfarcry.springbootmybatis.common.controller.BaseController;
 import cn.hhfarcry.springbootmybatis.common.utils.EntityUtils;
+import cn.hhfarcry.springbootmybatis.common.utils.ParamUtils;
 import cn.hhfarcry.springbootmybatis.common.vo.ResponseVO;
 import cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity;
 import cn.hhfarcry.springbootmybatis.example.service.IResourceService;
@@ -50,6 +51,30 @@ public class ResourceController extends BaseController {
         try {
             Map<String,Object> param = EntityUtils.arraymapTobjectmap(request.getParameterMap());
             return new ResponseVO(resourceService.getPage(param));
+        } catch (Exception e) {
+            logger.error("controller error at {} --> {}", this.getClass().getName(), e);
+            return new ResponseVO(ResponseVO.MESSAGE_SYSTEM_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/getResourcesByRoleId" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public ResponseVO getResourcesByRoleId(HttpServletRequest request, HttpServletResponse response){
+        try {
+            String roleId = request.getParameter("roleId");
+            return new ResponseVO(resourceService.getResourcesByRoleId(ParamUtils.strTIntger(roleId)));
+        } catch (Exception e) {
+            logger.error("controller error at {} --> {}", this.getClass().getName(), e);
+            return new ResponseVO(ResponseVO.MESSAGE_SYSTEM_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/getResourcesByUserId" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public ResponseVO getResourcesByUserId(HttpServletRequest request, HttpServletResponse response){
+        try {
+            String userId = request.getParameter("userId");
+            return new ResponseVO(resourceService.getResourcesByUserId(ParamUtils.strTIntger(userId)));
         } catch (Exception e) {
             logger.error("controller error at {} --> {}", this.getClass().getName(), e);
             return new ResponseVO(ResponseVO.MESSAGE_SYSTEM_ERROR);

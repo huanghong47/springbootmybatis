@@ -5,6 +5,8 @@ import cn.hhfarcry.springbootmybatis.example.entity.RoleEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @program: springbootmybatis
  * @description: ${description}
@@ -15,4 +17,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface RoleDao extends BaseDao<RoleEntity> {
 
+    List<RoleEntity>getRolesByUserId(Integer userId);
 }

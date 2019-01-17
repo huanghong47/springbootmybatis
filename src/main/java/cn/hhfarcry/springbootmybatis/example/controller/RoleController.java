@@ -2,6 +2,7 @@ package cn.hhfarcry.springbootmybatis.example.controller;
 
 import cn.hhfarcry.springbootmybatis.common.controller.BaseController;
 import cn.hhfarcry.springbootmybatis.common.utils.EntityUtils;
+import cn.hhfarcry.springbootmybatis.common.utils.ParamUtils;
 import cn.hhfarcry.springbootmybatis.common.vo.ResponseVO;
 import cn.hhfarcry.springbootmybatis.example.entity.RoleEntity;
 import cn.hhfarcry.springbootmybatis.example.service.IRoleService;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,7 +47,6 @@ public class RoleController extends BaseController {
     }
 
 
-
     @RequestMapping(value = "/getpage" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public ResponseVO getPage(HttpServletRequest request, HttpServletResponse response){
@@ -58,4 +58,32 @@ public class RoleController extends BaseController {
             return new ResponseVO(ResponseVO.MESSAGE_SYSTEM_ERROR);
         }
     }
+
+    @RequestMapping(value = "/bindroleResources" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public ResponseVO bindroleResources(HttpServletRequest request, HttpServletResponse response){
+        try {
+            String roleId = request.getParameter("roleId");
+            String resourceIds = request.getParameter("resourceIds");
+            List<String> resourceIdsstr = ParamUtils.strTListstr(resourceIds,",");
+            return new ResponseVO(roleService.bindroleResources(roleId,resourceIdsstr));
+        } catch (Exception e) {
+            logger.error("controller error at {} --> {}", this.getClass().getName(), e);
+            return new ResponseVO(ResponseVO.MESSAGE_SYSTEM_ERROR);
+        }
+    }
+
+
+    @RequestMapping(value = "/getRolesByUserId" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public ResponseVO getRolesByUserId(HttpServletRequest request, HttpServletResponse response){
+        try {
+            String userId = request.getParameter("userId");
+            return new ResponseVO(roleService.getRolesByUserId(ParamUtils.strTIntger(userId)));
+        } catch (Exception e) {
+            logger.error("controller error at {} --> {}", this.getClass().getName(), e);
+            return new ResponseVO(ResponseVO.MESSAGE_SYSTEM_ERROR);
+        }
+    }
+
 }

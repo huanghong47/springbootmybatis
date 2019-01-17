@@ -3,6 +3,7 @@ package cn.hhfarcry.springbootmybatis.example.service;
 import cn.hhfarcry.springbootmybatis.example.entity.UserEntity;
 import com.github.pagehelper.Page;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,8 @@ import java.util.Map;
  */
 public interface IUserService {
     String insertUser(UserEntity param);
-    List<UserEntity> getlist(Map<String,Object> param);
     Page<UserEntity> getPage(Map<String,Object> param);
+    String bindUserRoles(String userId,List<String>roleIds);
+    String loginUser(UserEntity param, HttpServletResponse response);
 
 }

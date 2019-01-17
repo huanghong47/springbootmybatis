@@ -18,4 +18,6 @@ import java.util.Map;
 @Mapper
 public interface ResourceDao extends BaseDao<ResourceEntity> {
 
+    List<ResourceEntity>getResourcesByRoleId(Integer roleId);
+    List<ResourceEntity>getResourcesByUserId(Integer userId);
 }

@@ -1,10 +1,10 @@
 package cn.hhfarcry.springbootmybatis.common.utils;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @program: springbootmybatis
@@ -80,17 +80,68 @@ public class ParamUtils {
         return !isBlank(stringObj);
     }
 
-    public static Integer strTint(Object str){
+    /**
+     * 验证byte数组
+     * @param bytes
+     * @return
+     */
+    public static boolean isBlank(byte[] bytes) {
+        // 根据byte数组长度为0判断
+        return bytes.length == 0 || bytes == null;
+    }
+
+
+    public static boolean isNotBlank(byte[] bytes) {
+        return !isBlank(bytes);
+    }
+
+
+    /**
+     * String转Integer
+     * @param str
+     * @return
+     */
+    public static Integer strTIntger(Object str){
         if(isBlank(str)){
-            return 0;
+            return null;
         }
         try {
             return Integer.parseInt(str.toString());
         } catch (Exception e) {
             logger.debug("error at {} --> {}", ParamUtils.class.getName(), e);
-            return 0;
+            return null;
         }
     }
 
 
+    /**
+     * String转List<String>
+     * @param param
+     * @param reg
+     * @return
+     */
+    public static List<String> strTListstr(String param, String reg){
+        if(isBlank(param)){
+            return null;
+        }
+        return new ArrayList<>(Arrays.asList(param.split(reg)));
+    }
+
+    /**
+     * String转List<Integer>
+     * @param param
+     * @param reg
+     * @return
+     */
+    public static List<Integer> strTListintger(String param,String reg){
+        List<String> strlist = strTListstr(param,reg);
+        List<Integer> result = new ArrayList<>();
+        if(CollectionUtils.isNotEmpty(strlist)){
+            for (String s : strlist) {
+                Integer i = strTIntger(s);
+                result.add(i);
+            }
+        }
+        return result;
+    }
 }

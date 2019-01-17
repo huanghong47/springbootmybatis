@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * @program: springbootmybatis
@@ -34,5 +35,15 @@ public class ResourceService extends BaseService<ResourceEntity> implements IRes
         super.buildUser(param);
         resourceDao.insertOrUpdateByEntity(param);
         return "ok";
+    }
+
+    @Override
+    public List<ResourceEntity> getResourcesByRoleId(Integer roleId) {
+        return resourceDao.getResourcesByRoleId(roleId);
+    }
+
+    @Override
+    public List<ResourceEntity> getResourcesByUserId(Integer userId) {
+        return resourceDao.getResourcesByUserId(userId);
     }
 }

@@ -17,6 +17,14 @@
     <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.example.entity.UserRoleEntity" parameterType="map">
         select <include refid="allcolumn"></include>
         from t_user_role
+        <where>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+        </where>
     </select>
 
     <insert id="insertUserRole" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.example.entity.UserRoleEntity">
@@ -30,4 +38,18 @@
        ,#{roleId})
     </insert>
 
+    <insert id="insertUserRoles" parameterType="java.util.List">
+        insert into
+        t_user_role
+        (user_id
+        ,role_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.userId,jdbcType=INTEGER},#{item.roleId,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <delete id="deleteUserRoles">
+        delete from t_user_role where user_id = #{0}
+    </delete>
 </mapper>

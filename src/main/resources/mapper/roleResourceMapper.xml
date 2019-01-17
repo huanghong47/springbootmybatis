@@ -31,4 +31,18 @@
        ,#{resourceId})
     </insert>
 
+    <insert id="insertRoleResources" parameterType="java.util.List">
+        insert into
+        t_role_resource
+        (role_id
+        ,resource_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.roleId,jdbcType=INTEGER},#{item.resourceId,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <delete id="deleteRoleResources">
+        delete from t_role_resource where role_id = #{0}
+    </delete>
 </mapper>

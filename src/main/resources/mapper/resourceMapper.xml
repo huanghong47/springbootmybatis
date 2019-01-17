@@ -76,4 +76,47 @@
         ,update_time = current_timestamp
     </insert>
 
+    <select id="getResourcesByRoleId" parameterType="Integer" resultType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity">
+        select
+            resource.id
+            ,resource.uuid
+            ,resource.is_deleted
+            ,resource.status
+            ,resource.comment
+            ,resource.create_user_uuid
+            ,resource.create_time
+            ,resource.update_user_uuid
+            ,resource.update_time
+            ,resource.resource_name
+            ,resource.resource_type
+            ,resource.resource_url
+        from t_resource resource
+        left join t_role_resource rr
+        on resource.id = rr.resource_id
+        where rr.role_id = #{0}
+    </select>
+
+    <select id="getResourcesByUserId" parameterType="Integer" resultType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity">
+        select
+            resource.id
+            ,resource.uuid
+            ,resource.is_deleted
+            ,resource.status
+            ,resource.comment
+            ,resource.create_user_uuid
+            ,resource.create_time
+            ,resource.update_user_uuid
+            ,resource.update_time
+            ,resource.resource_name
+            ,resource.resource_type
+            ,resource.resource_url
+        from t_resource resource
+        left join t_role_resource rr
+        on resource.id = rr.resource_id
+        left join t_user_role ur
+        on rr.role_id = ur.role_id
+        where ur.user_id = #{0}
+    </select>
+
+
 </mapper>

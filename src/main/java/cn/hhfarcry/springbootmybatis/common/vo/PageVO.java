@@ -39,8 +39,8 @@ public class PageVO {
         PageVO vo = new PageVO();
         vo.setField(ParamUtils.isBlank(params.get(PageVO.PARAMNAME_FIELD)) ? PageVO.DEFAULT_FIELD : params.get(PageVO.PARAMNAME_FIELD).toString());
         vo.setOrder(ParamUtils.isBlank(params.get(PageVO.PARAMNAME_ORDER)) ? PageVO.DEFAULT_ORDER : params.get(PageVO.PARAMNAME_ORDER).toString());
-        vo.setPagenum(ParamUtils.isBlank(params.get(PageVO.PARAMNAME_PAGENUM)) ? PageVO.DEFAULT_PAGENUM : ParamUtils.strTint(params.get(PageVO.DEFAULT_PAGENUM)));
-        vo.setPagesize(ParamUtils.isBlank(params.get(PageVO.PARAMNAME_PAGESIZE)) ? PageVO.DEFAULT_PAGESIZE : ParamUtils.strTint(params.get(PageVO.PARAMNAME_PAGESIZE)));
+        vo.setPagenum(ParamUtils.isBlank(params.get(PageVO.PARAMNAME_PAGENUM)) ? PageVO.DEFAULT_PAGENUM : ParamUtils.strTIntger(params.get(PageVO.PARAMNAME_PAGENUM)));
+        vo.setPagesize(ParamUtils.isBlank(params.get(PageVO.PARAMNAME_PAGESIZE)) ? PageVO.DEFAULT_PAGESIZE : ParamUtils.strTIntger(params.get(PageVO.PARAMNAME_PAGESIZE)));
         return vo;
     }
 
