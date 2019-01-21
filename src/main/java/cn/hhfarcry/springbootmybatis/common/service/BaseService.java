@@ -2,14 +2,20 @@ package cn.hhfarcry.springbootmybatis.common.service;
 
 import cn.hhfarcry.springbootmybatis.common.dao.BaseDao;
 import cn.hhfarcry.springbootmybatis.common.entity.BaseEntity;
+import cn.hhfarcry.springbootmybatis.common.security.SecurityService;
 import cn.hhfarcry.springbootmybatis.common.utils.ParamUtils;
 import cn.hhfarcry.springbootmybatis.common.utils.UUIDUtils;
 import cn.hhfarcry.springbootmybatis.common.vo.PageVO;
+import cn.hhfarcry.springbootmybatis.example.entity.UserEntity;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +31,9 @@ public class BaseService <E extends BaseEntity>{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     protected BaseDao baseDao;
+
+    @Autowired
+    private SecurityService service;
 
     protected void init(){
 
@@ -46,7 +55,7 @@ public class BaseService <E extends BaseEntity>{
         if(ParamUtils.isBlank(baseEntity)){
             return;
         }else{
-//            UserEntity currUser = getCurrUser();//获取当前用户，尚未完善
+            UserEntity user = service.getUser();
             //构建uuid
             if(ParamUtils.isBlank(baseEntity.getIsDeleted())){
                 baseEntity.setIsDeleted(0);
@@ -62,17 +71,18 @@ public class BaseService <E extends BaseEntity>{
                 baseEntity.setCreateTime(new Date());
             }
             if(ParamUtils.isBlank(baseEntity.getCreateUserUuid())){
-                baseEntity.setCreateUserUuid("system");
+                baseEntity.setCreateUserUuid(user.getId()+"");
 //                baseEntity.setCreateUserUuid(currUser.getUUID);
             }
             if(ParamUtils.isBlank(baseEntity.getUpdateTime())){
                 baseEntity.setUpdateTime(new Date());
             }
             if(ParamUtils.isBlank(baseEntity.getUpdateUserUuid())){
-                baseEntity.setUpdateUserUuid("system");
+                baseEntity.setUpdateUserUuid(user.getId()+"");
             }
         }
     }
+
 }
 
 

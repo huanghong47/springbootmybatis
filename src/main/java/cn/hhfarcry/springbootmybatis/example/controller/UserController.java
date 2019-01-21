@@ -41,6 +41,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/save" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
+    @RequiresPermissions(logical = Logical.AND, value = {"user/save"})
     public ResponseVO save(@Validated(UserAddGroup.class)@RequestBody UserEntity userEntity){
         try {
             return new ResponseVO(userService.insertUser(userEntity));
@@ -52,9 +53,9 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/login" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public ResponseVO login(@Validated(UserLoginGroup.class)@RequestBody UserEntity userEntity, HttpServletResponse response){
+    public ResponseVO login(@Validated(UserLoginGroup.class)@RequestBody UserEntity userEntity){
         try {
-            return new ResponseVO(userService.loginUser(userEntity,response));
+            return new ResponseVO(userService.loginUser(userEntity));
         } catch (Exception e) {
             logger.error("controller error at {} --> {}", this.getClass().getName(), e);
             return new ResponseVO(ResponseVO.MESSAGE_SYSTEM_ERROR);

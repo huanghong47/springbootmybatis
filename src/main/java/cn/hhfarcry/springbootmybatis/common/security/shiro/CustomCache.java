@@ -38,13 +38,6 @@ public class CustomCache<K,V> implements Cache<K,V> {
         }
         return JedisUtil.getObject(this.getKey(key));
     }
-//
-//    private static String shiroCacheExpireTime;
-//
-//    @Value("${shiroCacheExpireTime}")
-//    public static void setShiroCacheExpireTime(String shiroCacheExpireTime) {
-//        CustomCache.shiroCacheExpireTime = shiroCacheExpireTime;
-//    }
 
     /**
      * 保存缓存

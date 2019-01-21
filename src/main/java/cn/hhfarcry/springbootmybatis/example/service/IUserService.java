@@ -17,6 +17,6 @@ public interface IUserService {
     String insertUser(UserEntity param);
     Page<UserEntity> getPage(Map<String,Object> param);
     String bindUserRoles(String userId,List<String>roleIds);
-    String loginUser(UserEntity param, HttpServletResponse response);
+    String loginUser(UserEntity param);
 
 }

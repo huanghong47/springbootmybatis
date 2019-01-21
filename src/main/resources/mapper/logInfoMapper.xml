@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hhfarcry.springbootmybatis.common.log.mymanager.LogInfoDao">
+    <sql id="allcolumn">
+        id
+        ,user_id
+        ,user_name
+        ,ip
+        ,op_model
+        ,op_event
+        ,create_date
+        ,op_content
+        ,description
+        ,op_result
+    </sql>
+
+    <sql id="allcolumn2">
+        #{id}
+        ,#{userId}
+        ,#{userName}
+        ,#{ip}
+        ,#{opModel}
+        ,#{opEvent}
+        ,#{createDate}
+        ,#{opContent}
+        ,#{description}
+        ,#{opResult}
+    </sql>
+
+
+    <insert id="insertLogInfo" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.common.log.mymanager.LogInfoEntity">
+        insert into t_log_info
+        (user_id
+        ,user_name
+        ,ip
+        ,op_model
+        ,op_event
+        ,create_date
+        ,op_content
+        ,description
+        ,op_result)
+        values
+        (#{userId}
+        ,#{userName}
+        ,#{ip}
+        ,#{opModel}
+        ,#{opEvent}
+        ,#{createDate}
+        ,#{opContent}
+        ,#{description}
+        ,#{opResult})
+    </insert>
+
+</mapper>

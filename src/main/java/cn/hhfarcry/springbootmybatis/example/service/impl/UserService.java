@@ -1,6 +1,12 @@
 package cn.hhfarcry.springbootmybatis.example.service.impl;
 
 import cn.hhfarcry.springbootmybatis.common.constant.Constant;
+import cn.hhfarcry.springbootmybatis.common.log.myannotation.LogEnable;
+import cn.hhfarcry.springbootmybatis.common.log.myannotation.LogEvent;
+import cn.hhfarcry.springbootmybatis.common.log.myannotation.LogKey;
+import cn.hhfarcry.springbootmybatis.common.log.myenum.EventType;
+import cn.hhfarcry.springbootmybatis.common.log.myenum.ModuleType;
+import cn.hhfarcry.springbootmybatis.common.security.SecurityService;
 import cn.hhfarcry.springbootmybatis.common.security.jwt.JwtUtil;
 import cn.hhfarcry.springbootmybatis.common.security.redis.JedisUtil;
 import cn.hhfarcry.springbootmybatis.common.service.BaseService;
@@ -34,6 +40,7 @@ import java.util.Map;
  */
 @Service
 @Transactional
+@LogEnable // 启动日志拦截
 public class UserService  extends BaseService<UserEntity> implements IUserService {
 
     @Autowired
@@ -42,6 +49,9 @@ public class UserService  extends BaseService<UserEntity> implements IUserServic
     @Autowired
     private UserRoleDao userRoleDao;
 
+    @Autowired
+    private SecurityService securityService;
+
     @Override
     @PostConstruct
     public void init(){
@@ -49,6 +59,7 @@ public class UserService  extends BaseService<UserEntity> implements IUserServic
     }
 
     @Override
+    @LogEvent(module = ModuleType.USER,event = EventType.ADD, desc = "新增用户")
     public String insertUser(UserEntity param) {
         Map<String,Object>params = new HashMap<>();
         params.put("userName",param.getUserName());
@@ -63,7 +74,7 @@ public class UserService  extends BaseService<UserEntity> implements IUserServic
         param.setPassword(key);
         int result = userDao.insertOrUpdateByEntity(param);
         if(result>0){
-            return "ok";
+            return  "ok";
         }else{
             return "注册新用户失败";
         }
@@ -75,7 +86,8 @@ public class UserService  extends BaseService<UserEntity> implements IUserServic
 
 
     @Override
-    public String loginUser(UserEntity param, HttpServletResponse response) {
+    @LogEvent(module = ModuleType.USER,event = EventType.LOGIN, desc = "登录")
+    public String  loginUser(UserEntity param) {
         Map<String,Object>params = new HashMap<>();
         params.put("userName",param.getUserName());
         //判读当前账号是否存在
@@ -95,8 +107,7 @@ public class UserService  extends BaseService<UserEntity> implements IUserServic
             JedisUtil.setObject(Constant.PREFIX_SHIRO_REFRESH_TOKEN + param.getUserName(), currentTimeMillis, Integer.parseInt(refreshTokenExpireTime));
 
             String token = JwtUtil.sign(param.getUserName(), currentTimeMillis);
-            response.setHeader("Authorization", token);
-            response.setHeader("Access-Control-Expose-Headers", "Authorization");
+            securityService.loginSetToken(token);
             return "ok";
         }else{
             return "账号或密码错误";
