@@ -1,6 +1,7 @@
 package cn.hhfarcry.springbootmybatis.common.vo;
 
 import cn.hhfarcry.springbootmybatis.common.utils.ParamUtils;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,12 +26,19 @@ public class PageVO {
     public static final int DEFAULT_PAGESIZE = 10;
 
 
+    @ApiModelProperty(value="排序字段(默认create_time)",name="field",example="1")
     @Setter@Getter
     private String field;
+
+    @ApiModelProperty(value="排序规则(默认升序:asc)",name="order",example="1")
     @Setter@Getter
     private String order;
+
+    @ApiModelProperty(value="页码(默认1)",name="pagenum",example="1")
     @Setter@Getter
     private Integer pagenum;
+
+    @ApiModelProperty(value="每页数量(默认10)",name="pagenum",example="1")
     @Setter@Getter
     private Integer pagesize;
 

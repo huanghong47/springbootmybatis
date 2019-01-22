@@ -1,4 +1,4 @@
-package cn.hhfarcry.springbootmybatis.common.utils;
+package cn.hhfarcry.springbootmybatis.common.security.utils;
 
 /**
  * 进制转换工具

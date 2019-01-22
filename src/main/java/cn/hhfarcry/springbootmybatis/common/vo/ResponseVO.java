@@ -3,6 +3,7 @@ package cn.hhfarcry.springbootmybatis.common.vo;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.CollectionUtils;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
  * @author: huanghong
  * @date: 2019-01-10 10:21
  */
+@ApiIgnore
 public class ResponseVO {
 
     public static final String MESSAGE_OK = "ok";

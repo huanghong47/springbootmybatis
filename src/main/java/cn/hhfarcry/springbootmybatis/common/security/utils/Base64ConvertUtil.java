@@ -1,4 +1,4 @@
-package cn.hhfarcry.springbootmybatis.common.utils;
+package cn.hhfarcry.springbootmybatis.common.security.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;

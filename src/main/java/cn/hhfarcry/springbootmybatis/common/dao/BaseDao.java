@@ -24,4 +24,23 @@ public interface BaseDao <E extends BaseEntity>{
      * @param entity
      */
     int insertOrUpdateByEntity(E entity);
+
+    /**
+     * 新增
+     * @param entity
+     */
+    int insertByEntity(E entity);
+
+    /**
+     * 修改
+     * @param entity
+     */
+    int updateByEntity(E entity);
+
+    /**
+     * 批量新增
+     * @param entitys
+     * @return
+     */
+    int insertByEntityBatch(List<E>entitys);
 }

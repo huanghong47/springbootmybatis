@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hhfarcry.springbootmybatis.common.upload.FileDao">
+    <sql id="allcolumn">
+        uuid
+        ,is_deleted
+        ,status
+        ,comment
+        ,create_user_uuid
+        ,create_time
+        ,update_user_uuid
+        ,update_time
+        ,file_name
+        ,is_file
+        ,parent_id
+        ,file_type
+        ,file_prefix
+        ,file_suffix
+        ,file_url
+        ,thumbnail_url
+    </sql>
+
+    <sql id="allcolumn2">
+        #{uuid}
+        ,#{isDeleted}
+        ,#{status}
+        ,#{comment}
+        ,#{createUserUuid}
+        ,#{createTime}
+        ,#{updateUserUuid}
+        ,#{updateTime}
+        ,#{fileName}
+        ,#{isFile}
+        ,#{parentId}
+        ,#{fileType}
+        ,#{filePrefix}
+        ,#{fileSuffix}
+        ,#{fileUrl}
+        ,#{thumbnailUrl}
+    </sql>
+
+    <insert id="insertOrUpdateByEntity" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.common.upload.FileEntity">
+        insert into t_file
+        (<include refid="allcolumn"></include>)
+        values
+        (<include refid="allcolumn2"></include>)
+        on duplicate key update
+        update_user_uuid = #{updateUserUuid}
+        ,update_time = current_timestamp
+    </insert>
+
+    <insert id="insertByEntity" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.common.upload.FileEntity">
+        insert into t_file
+        (<include refid="allcolumn"></include>)
+        values
+        (<include refid="allcolumn2"></include>)
+    </insert>
+
+    <insert id="insertByEntityBatch" parameterType="list">
+        insert into t_file
+        (<include refid="allcolumn"></include>)
+        values
+        <foreach collection="list" item="file" separator=",">
+            (#{file.uuid}
+            ,#{file.isDeleted}
+            ,#{file.status}
+            ,#{file.comment}
+            ,#{file.createUserUuid}
+            ,#{file.createTime}
+            ,#{file.updateUserUuid}
+            ,#{file.updateTime}
+            ,#{file.fileName}
+            ,#{file.isFile}
+            ,#{file.parentId}
+            ,#{file.fileType}
+            ,#{file.filePrefix}
+            ,#{file.fileSuffix}
+            ,#{file.fileUrl}
+            ,#{file.thumbnailUrl})
+        </foreach>
+    </insert>
+    <update id="updateByEntity" parameterType="cn.hhfarcry.springbootmybatis.common.upload.FileEntity">
+        update t_file
+        <trim prefix="set" suffixOverrides=",">
+            <if test=" uuid != null and uuid != '' ">
+                uuid = #{uuid},
+            </if>
+            <if test=" isDeleted != null and isDeleted != '' ">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test=" status != null and status != '' ">
+                status = #{status},
+            </if>
+            <if test=" comment != null and comment != '' ">
+                comment = #{comment},
+            </if>
+            <if test=" createUserUuid != null and createUserUuid != '' ">
+                create_user_uuid = #{createUserUuid},
+            </if>
+            <if test=" createTime != null and createTime != '' ">
+                create_time = #{createTime},
+            </if>
+            <if test=" updateUserUuid != null and updateUserUuid != '' ">
+                update_user_uuid = #{updateUserUuid},
+            </if>
+            <if test=" updateTime != null and updateTime != '' ">
+                update_time = #{updateTime},
+            </if>
+            <if test=" fileName != null and fileName != '' ">
+                file_name = #{fileName},
+            </if>
+            <if test=" isFile != null and isFile != '' ">
+                is_file = #{isFile},
+            </if>
+            <if test=" parentId != null and parentId != '' ">
+                parent_id = #{parentId},
+            </if>
+            <if test=" fileType != null and fileType != '' ">
+                file_type = #{fileType},
+            </if>
+            <if test=" filePrefix != null and filePrefix != '' ">
+                file_prefix = #{filePrefix},
+            </if>
+            <if test=" fileSuffix != null and fileSuffix != '' ">
+                file_suffix = #{fileSuffix},
+            </if>
+            <if test=" fileUrl != null and fileUrl != '' ">
+                file_url = #{fileUrl},
+            </if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.common.upload.FileEntity" parameterType="map">
+        select id,<include refid="allcolumn"></include>
+        from t_file
+        <where>
+            and is_deleted = 0
+            <if test=" uuid != null and uuid != '' ">
+                and uuid = #{uuid}
+            </if>
+            <if test=" isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test=" status != null ">
+                and status = #{status}
+            </if>
+            <if test=" comment != null and comment != '' ">
+                and comment = #{comment}
+            </if>
+            <if test=" createUserUuid != null and createUserUuid != '' ">
+                and create_user_uuid = #{createUserUuid}
+            </if>
+            <if test=" createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test=" updateUserUuid != null and updateUserUuid != '' ">
+                and update_user_uuid = #{updateUserUuid}
+            </if>
+            <if test=" updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test=" fileName != null and fileName != '' ">
+                and file_name = #{fileName}
+            </if>
+            <if test=" isFile != null ">
+                and is_file = #{isFile}
+            </if>
+            <if test=" parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            <if test=" fileType != null and fileType != '' ">
+                and file_type = #{fileType}
+            </if>
+            <if test=" filePrefix != null and filePrefix != '' ">
+                and file_prefix = #{filePrefix}
+            </if>
+            <if test=" fileSuffix != null and fileSuffix != '' ">
+                and file_suffix = #{fileSuffix}
+            </if>
+            <if test=" fileUrl != null and fileUrl != '' ">
+                and file_url = #{fileUrl}
+            </if>
+            <if test=" thumbnailUrl != null and thumbnailUrl != '' ">
+                and thumbnail_url = #{thumbnailUrl}
+            </if>
+        </where>
+    </select>
+
+    <select id="getRelation" parameterType="Integer" resultType="String">
+        SELECT T2.file_name
+        FROM (
+        SELECT
+        @r AS _id,
+        (SELECT @r := parent_id FROM t_file WHERE id = _id) AS parent_id,
+        @l := @l + 1 AS lvl
+        FROM
+        (SELECT @r := #{0}, @l := 0) vars,
+        t_file h
+        WHERE @r <![CDATA[ <> ]]> 0) T1
+        JOIN t_file T2
+        ON T1._id = T2.id
+        ORDER BY T1.lvl DESC
+    </select>
+</mapper>

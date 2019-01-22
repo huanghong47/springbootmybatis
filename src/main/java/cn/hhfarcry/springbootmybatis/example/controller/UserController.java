@@ -8,6 +8,7 @@ import cn.hhfarcry.springbootmybatis.example.entity.UserEntity;
 import cn.hhfarcry.springbootmybatis.example.entity.valid.UserAddGroup;
 import cn.hhfarcry.springbootmybatis.example.entity.valid.UserLoginGroup;
 import cn.hhfarcry.springbootmybatis.example.service.IUserService;
+import io.swagger.annotations.*;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +32,7 @@ import java.util.Map;
  * @author: huanghong
  * @date: 2019-01-08 13:16
  */
+@Api(tags="用户管理")
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
@@ -39,10 +42,15 @@ public class UserController extends BaseController {
     @Autowired
     private IUserService userService;
 
-    @RequestMapping(value = "/save" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ApiOperation(value="注册用户", notes = "post请求")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="userName", value="用户名", required = true),
+            @ApiImplicitParam(name="password", value="密码", required = true),
+    })
+    @RequestMapping(value = "/save" ,method = {RequestMethod.POST})
     @ResponseBody
     @RequiresPermissions(logical = Logical.AND, value = {"user/save"})
-    public ResponseVO save(@Validated(UserAddGroup.class)@RequestBody UserEntity userEntity){
+    public ResponseVO save(@ApiIgnore @Validated(UserAddGroup.class)@RequestBody UserEntity userEntity){
         try {
             return new ResponseVO(userService.insertUser(userEntity));
         } catch (Exception e) {
@@ -53,6 +61,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/login" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
+    @ApiIgnore
     public ResponseVO login(@Validated(UserLoginGroup.class)@RequestBody UserEntity userEntity){
         try {
             return new ResponseVO(userService.loginUser(userEntity));

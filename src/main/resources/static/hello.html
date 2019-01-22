@@ -5,8 +5,30 @@
     <title>欢迎进入</title>
 </head>
 <body>
-<h1>
-    测试html页面
-</h1>
+    <h1>
+        测试页面
+    </h1>
+
+    <h2>
+        单文件上传
+    </h2>
+    <form method="POST" action="/file/uploadSingle" enctype="multipart/form-data">
+        <input type="file" name="file"  /><br/><br/>
+        <input type="submit" value="上传" />
+    </form>
+    <hr/>
+
+    <h2>
+        多文件上传
+    </h2>
+    <form method="POST" action="/file/uploadMultiple" enctype="multipart/form-data">
+        <input type="file" name="file" multiple  /><br/><br/>
+        <input type="submit" value="上传" />
+    </form>
+    <hr/>
+<h2>
+    图片显示
+</h2>
+<img src="test/0ac10798a78f4f92b1c5aaa6e5d93b9f.jpg">
 </body>
 </html>

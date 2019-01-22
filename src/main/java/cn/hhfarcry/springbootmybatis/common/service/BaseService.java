@@ -56,6 +56,7 @@ public class BaseService <E extends BaseEntity>{
             return;
         }else{
             UserEntity user = service.getUser();
+
             //构建uuid
             if(ParamUtils.isBlank(baseEntity.getIsDeleted())){
                 baseEntity.setIsDeleted(0);
@@ -70,14 +71,13 @@ public class BaseService <E extends BaseEntity>{
             if(ParamUtils.isBlank(baseEntity.getCreateTime())){
                 baseEntity.setCreateTime(new Date());
             }
-            if(ParamUtils.isBlank(baseEntity.getCreateUserUuid())){
+            if(ParamUtils.isBlank(baseEntity.getCreateUserUuid()) && ParamUtils.isNotBlank(user)){
                 baseEntity.setCreateUserUuid(user.getId()+"");
-//                baseEntity.setCreateUserUuid(currUser.getUUID);
             }
             if(ParamUtils.isBlank(baseEntity.getUpdateTime())){
                 baseEntity.setUpdateTime(new Date());
             }
-            if(ParamUtils.isBlank(baseEntity.getUpdateUserUuid())){
+            if(ParamUtils.isBlank(baseEntity.getUpdateUserUuid()) && ParamUtils.isNotBlank(user)){
                 baseEntity.setUpdateUserUuid(user.getId()+"");
             }
         }

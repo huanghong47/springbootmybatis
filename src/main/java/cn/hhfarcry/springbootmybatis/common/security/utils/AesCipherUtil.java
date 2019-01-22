@@ -1,4 +1,4 @@
-package cn.hhfarcry.springbootmybatis.common.utils;
+package cn.hhfarcry.springbootmybatis.common.security.utils;
 
 import cn.hhfarcry.springbootmybatis.common.exception.CustomUnauthorizedException;
 import org.slf4j.Logger;
