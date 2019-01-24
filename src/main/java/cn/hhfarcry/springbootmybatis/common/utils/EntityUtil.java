@@ -21,7 +21,7 @@ import java.util.Map;
  * @author: huanghong
  * @date: 2019-01-16 08:57
  */
-public class EntityUtils {
+public class EntityUtil {
     private static Logger logger = LoggerFactory.getLogger(DateTimeUtils.class);
 
     //返回值类型为Map<String, Object>
@@ -99,7 +99,7 @@ public class EntityUtils {
                 }
             }
         } catch (RuntimeException e) {
-            logger.error("EntityUtils entityTmap --> {}", e);
+            logger.error("EntityUtil entityTmap --> {}", e);
         } finally {
             return map;
         }
@@ -121,7 +121,7 @@ public class EntityUtils {
             BeanUtils.populate(t, newMap);
             return t;
         } catch (Exception e) {
-            logger.error("EntityUtils mapTentity --> {}", e);
+            logger.error("EntityUtil mapTentity --> {}", e);
             return null;
         }
     }

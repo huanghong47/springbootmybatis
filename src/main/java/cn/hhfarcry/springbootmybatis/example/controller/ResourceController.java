@@ -1,7 +1,7 @@
 package cn.hhfarcry.springbootmybatis.example.controller;
 
 import cn.hhfarcry.springbootmybatis.common.controller.BaseController;
-import cn.hhfarcry.springbootmybatis.common.utils.EntityUtils;
+import cn.hhfarcry.springbootmybatis.common.utils.EntityUtil;
 import cn.hhfarcry.springbootmybatis.common.utils.ParamUtils;
 import cn.hhfarcry.springbootmybatis.common.vo.ResponseVO;
 import cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity;
@@ -49,7 +49,7 @@ public class ResourceController extends BaseController {
     @ResponseBody
     public ResponseVO getPage(HttpServletRequest request, HttpServletResponse response){
         try {
-            Map<String,Object> param = EntityUtils.arraymapTobjectmap(request.getParameterMap());
+            Map<String,Object> param = EntityUtil.arraymapTobjectmap(request.getParameterMap());
             return new ResponseVO(resourceService.getPage(param));
         } catch (Exception e) {
             logger.error("controller error at {} --> {}", this.getClass().getName(), e);

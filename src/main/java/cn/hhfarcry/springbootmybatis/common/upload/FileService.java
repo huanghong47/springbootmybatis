@@ -1,8 +1,7 @@
 package cn.hhfarcry.springbootmybatis.common.upload;
 
 import cn.hhfarcry.springbootmybatis.common.service.BaseService;
-import cn.hhfarcry.springbootmybatis.common.utils.EntityUtils;
-import cn.hhfarcry.springbootmybatis.common.utils.ParamUtils;
+import cn.hhfarcry.springbootmybatis.common.utils.EntityUtil;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +49,7 @@ public class FileService extends BaseService<FileEntity> implements IFileService
 
     @Override
     public Page<FileEntity> getPage(FileEntity params) {
-        Map<String,Object> map = EntityUtils.entityTmap(params);
+        Map<String,Object> map = EntityUtil.entityTmap(params);
         return super.getPage(map);
     }
 }

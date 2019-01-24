@@ -1,7 +1,7 @@
 package cn.hhfarcry.springbootmybatis.example.controller;
 
 import cn.hhfarcry.springbootmybatis.common.controller.BaseController;
-import cn.hhfarcry.springbootmybatis.common.utils.EntityUtils;
+import cn.hhfarcry.springbootmybatis.common.utils.EntityUtil;
 import cn.hhfarcry.springbootmybatis.common.utils.ParamUtils;
 import cn.hhfarcry.springbootmybatis.common.vo.ResponseVO;
 import cn.hhfarcry.springbootmybatis.example.entity.UserEntity;
@@ -14,7 +14,6 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +21,6 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +45,7 @@ public class UserController extends BaseController {
             @ApiImplicitParam(name="userName", value="用户名", required = true),
             @ApiImplicitParam(name="password", value="密码", required = true),
     })
-    @RequestMapping(value = "/save" ,method = {RequestMethod.POST})
+    @PostMapping(value = "/save")
     @ResponseBody
     @RequiresPermissions(logical = Logical.AND, value = {"user/save"})
     public ResponseVO save(@ApiIgnore @Validated(UserAddGroup.class)@RequestBody UserEntity userEntity){
@@ -77,7 +75,7 @@ public class UserController extends BaseController {
     @RequiresPermissions(logical = Logical.AND, value = {"user/getpage"})
     public ResponseVO getPage(HttpServletRequest request, HttpServletResponse response){
         try {
-            Map<String,Object> param = EntityUtils.arraymapTobjectmap(request.getParameterMap());
+            Map<String,Object> param = EntityUtil.arraymapTobjectmap(request.getParameterMap());
             return new ResponseVO(userService.getPage(param));
         } catch (Exception e) {
             logger.error("controller error at {} --> {}", this.getClass().getName(), e);

@@ -48,6 +48,7 @@ public class FileController {
     @ResponseBody
     public ResponseVO createFolder(HttpServletRequest request, @Validated(FolderAddGroup.class)@RequestBody FileEntity fileEntity){
         try {
+
             return new ResponseVO(fileService.insertFile(fileEntity));
         } catch (Exception e) {
             log.error("controller error at {} --> {}", this.getClass().getName(), e);
@@ -68,6 +69,7 @@ public class FileController {
             if(ParamUtils.isBlank(file)){
                 return new ResponseVO(ResponseVO.CODE_FAILED,ResponseVO.MESSAGE_LAKE_PARAMETER,0L,"无文件上传");
             }
+            log.info("测试是否乱码");
             String customPath = "test";
             String filename = file.getOriginalFilename();
             String fileType = filename.substring(filename.lastIndexOf("."));
