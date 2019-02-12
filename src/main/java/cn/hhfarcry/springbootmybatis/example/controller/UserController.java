@@ -47,7 +47,7 @@ public class UserController extends BaseController {
     })
     @PostMapping(value = "/save")
     @ResponseBody
-    @RequiresPermissions(logical = Logical.AND, value = {"user/save"})
+    //@RequiresPermissions(logical = Logical.AND, value = {"user/save"})
     public ResponseVO save(@ApiIgnore @Validated(UserAddGroup.class)@RequestBody UserEntity userEntity){
         try {
             return new ResponseVO(userService.insertUser(userEntity));
@@ -72,7 +72,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/getpage" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    @RequiresPermissions(logical = Logical.AND, value = {"user/getpage"})
+    //@RequiresPermissions(logical = Logical.AND, value = {"user/getpage"})
     public ResponseVO getPage(HttpServletRequest request, HttpServletResponse response){
         try {
             Map<String,Object> param = EntityUtil.arraymapTobjectmap(request.getParameterMap());
