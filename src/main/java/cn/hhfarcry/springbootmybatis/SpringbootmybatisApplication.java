@@ -8,12 +8,15 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 @EnableAutoConfiguration
-public class SpringbootmybatisApplication{
+public class SpringbootmybatisApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootmybatisApplication.class, args);
     }
 
-
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(SpringbootmybatisApplication.class);
+    }
 }
 
