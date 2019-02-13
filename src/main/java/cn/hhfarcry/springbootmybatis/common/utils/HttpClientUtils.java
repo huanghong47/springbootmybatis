@@ -1,4 +1,4 @@
-package test03HTTP;
+package cn.hhfarcry.springbootmybatis.common.utils;
 
 import cn.hhfarcry.springbootmybatis.common.utils.HttpClientResult;
 import com.alibaba.fastjson.JSONObject;

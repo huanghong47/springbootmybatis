@@ -249,7 +249,7 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <mainClass>cn.hhfarcry.springbootmybatis.SpringbootmybatisApplication</mainClass>
+                            <mainClass>cn.huanghong.DemoApplication</mainClass>
                         </configuration>
                     </execution>
                 </executions>

@@ -27,7 +27,7 @@ public enum  EventType {
     }
 
     public static void main(String[] args) {
-        System.out.println(EventType.LOGIN.getName());
+        System.out.println(EventType.LOGIN.getEvent());
     }
 
 }
