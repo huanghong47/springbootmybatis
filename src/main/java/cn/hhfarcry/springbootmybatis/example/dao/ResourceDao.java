@@ -1,12 +1,11 @@
 package cn.hhfarcry.springbootmybatis.example.dao;
 
-import cn.hhfarcry.springbootmybatis.common.dao.BaseDao;
+import cn.hhfarcry.springbootmybatis.common.base.dao.BaseDao;
 import cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @program: springbootmybatis

@@ -1,10 +1,10 @@
 package cn.hhfarcry.springbootmybatis.common.security.jwt;
 
-import cn.hhfarcry.springbootmybatis.common.constant.Constant;
-import cn.hhfarcry.springbootmybatis.common.exception.CustomException;
-import cn.hhfarcry.springbootmybatis.common.security.redis.JedisUtil;
-import cn.hhfarcry.springbootmybatis.common.utils.JsonConvertUtil;
-import cn.hhfarcry.springbootmybatis.common.vo.ResponseVO;
+import cn.hhfarcry.springbootmybatis.common.redis.Constant;
+import cn.hhfarcry.springbootmybatis.common.base.exception.CustomException;
+import cn.hhfarcry.springbootmybatis.common.redis.JedisUtil;
+import cn.hhfarcry.springbootmybatis.common.base.utils.JsonConvertUtil;
+import cn.hhfarcry.springbootmybatis.common.base.vo.ResponseVO;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;

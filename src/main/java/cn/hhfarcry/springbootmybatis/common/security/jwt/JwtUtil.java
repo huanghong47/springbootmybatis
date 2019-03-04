@@ -1,6 +1,6 @@
 package cn.hhfarcry.springbootmybatis.common.security.jwt;
 
-import cn.hhfarcry.springbootmybatis.common.constant.Constant;
+import cn.hhfarcry.springbootmybatis.common.redis.Constant;
 import cn.hhfarcry.springbootmybatis.common.security.utils.Base64ConvertUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

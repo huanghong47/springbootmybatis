@@ -1,9 +1,9 @@
 package cn.hhfarcry.springbootmybatis.common.security.shiro;
 
-import cn.hhfarcry.springbootmybatis.common.constant.Constant;
+import cn.hhfarcry.springbootmybatis.common.redis.Constant;
 import cn.hhfarcry.springbootmybatis.common.security.jwt.JwtUtil;
-import cn.hhfarcry.springbootmybatis.common.security.redis.JedisUtil;
-import cn.hhfarcry.springbootmybatis.common.utils.ParamUtils;
+import cn.hhfarcry.springbootmybatis.common.redis.JedisUtil;
+import cn.hhfarcry.springbootmybatis.common.base.utils.ParamUtils;
 import cn.hhfarcry.springbootmybatis.example.dao.ResourceDao;
 import cn.hhfarcry.springbootmybatis.example.dao.RoleDao;
 import cn.hhfarcry.springbootmybatis.example.dao.UserDao;

@@ -35,7 +35,7 @@
         <!--日志滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件归档,每超过100MB就会生成新的归档日志，
-            比如当前记录的日志文件时info.log,该文件超过100MB时进行归档，生成info2018-12-27.0.log，再超过就是info2018-12-27.1.log-->
+            比如当前记录的日志文件时info.loginstorage,该文件超过100MB时进行归档，生成info2018-12-27.0.loginstorage，再超过就是info2018-12-27.1.loginstorage-->
             <FileNamePattern>${LOG_HOME}/all/springbootmybatis%d{yyyy-MM-dd}.%i.log</FileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>10MB</maxFileSize>

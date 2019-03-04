@@ -1,6 +1,6 @@
 package cn.hhfarcry.springbootmybatis.common.security.utils;
 
-import cn.hhfarcry.springbootmybatis.common.exception.CustomUnauthorizedException;
+import cn.hhfarcry.springbootmybatis.common.base.exception.CustomUnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

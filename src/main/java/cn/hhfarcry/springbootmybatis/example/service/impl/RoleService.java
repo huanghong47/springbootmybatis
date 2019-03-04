@@ -1,7 +1,7 @@
 package cn.hhfarcry.springbootmybatis.example.service.impl;
 
-import cn.hhfarcry.springbootmybatis.common.service.BaseService;
-import cn.hhfarcry.springbootmybatis.common.utils.ParamUtils;
+import cn.hhfarcry.springbootmybatis.common.base.service.BaseService;
+import cn.hhfarcry.springbootmybatis.common.base.utils.ParamUtils;
 import cn.hhfarcry.springbootmybatis.example.dao.RoleDao;
 import cn.hhfarcry.springbootmybatis.example.dao.RoleResourceDao;
 import cn.hhfarcry.springbootmybatis.example.entity.RoleEntity;

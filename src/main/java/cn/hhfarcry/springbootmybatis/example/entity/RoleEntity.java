@@ -1,6 +1,6 @@
 package cn.hhfarcry.springbootmybatis.example.entity;
 
-import cn.hhfarcry.springbootmybatis.common.entity.BaseEntity;
+import cn.hhfarcry.springbootmybatis.common.base.entity.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

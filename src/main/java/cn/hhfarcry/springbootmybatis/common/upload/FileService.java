@@ -1,7 +1,7 @@
 package cn.hhfarcry.springbootmybatis.common.upload;
 
-import cn.hhfarcry.springbootmybatis.common.service.BaseService;
-import cn.hhfarcry.springbootmybatis.common.utils.EntityUtil;
+import cn.hhfarcry.springbootmybatis.common.base.service.BaseService;
+import cn.hhfarcry.springbootmybatis.common.base.utils.EntityUtil;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

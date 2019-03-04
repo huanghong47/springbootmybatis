@@ -1,6 +1,6 @@
 package cn.hhfarcry.springbootmybatis.example.service.impl;
 
-import cn.hhfarcry.springbootmybatis.common.service.BaseService;
+import cn.hhfarcry.springbootmybatis.common.base.service.BaseService;
 import cn.hhfarcry.springbootmybatis.example.dao.ResourceDao;
 import cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity;
 import cn.hhfarcry.springbootmybatis.example.service.IResourceService;

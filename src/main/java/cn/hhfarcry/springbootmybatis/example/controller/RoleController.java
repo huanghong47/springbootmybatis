@@ -1,9 +1,9 @@
 package cn.hhfarcry.springbootmybatis.example.controller;
 
-import cn.hhfarcry.springbootmybatis.common.controller.BaseController;
-import cn.hhfarcry.springbootmybatis.common.utils.EntityUtil;
-import cn.hhfarcry.springbootmybatis.common.utils.ParamUtils;
-import cn.hhfarcry.springbootmybatis.common.vo.ResponseVO;
+import cn.hhfarcry.springbootmybatis.common.base.controller.BaseController;
+import cn.hhfarcry.springbootmybatis.common.base.utils.EntityUtil;
+import cn.hhfarcry.springbootmybatis.common.base.utils.ParamUtils;
+import cn.hhfarcry.springbootmybatis.common.base.vo.ResponseVO;
 import cn.hhfarcry.springbootmybatis.example.entity.RoleEntity;
 import cn.hhfarcry.springbootmybatis.example.service.IRoleService;
 import org.slf4j.Logger;

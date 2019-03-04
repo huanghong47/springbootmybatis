@@ -1,16 +1,14 @@
 package cn.hhfarcry.springbootmybatis.example.controller;
 
-import cn.hhfarcry.springbootmybatis.common.controller.BaseController;
-import cn.hhfarcry.springbootmybatis.common.utils.EntityUtil;
-import cn.hhfarcry.springbootmybatis.common.utils.ParamUtils;
-import cn.hhfarcry.springbootmybatis.common.vo.ResponseVO;
+import cn.hhfarcry.springbootmybatis.common.base.controller.BaseController;
+import cn.hhfarcry.springbootmybatis.common.base.utils.EntityUtil;
+import cn.hhfarcry.springbootmybatis.common.base.utils.ParamUtils;
+import cn.hhfarcry.springbootmybatis.common.base.vo.ResponseVO;
 import cn.hhfarcry.springbootmybatis.example.entity.UserEntity;
 import cn.hhfarcry.springbootmybatis.example.entity.valid.UserAddGroup;
 import cn.hhfarcry.springbootmybatis.example.entity.valid.UserLoginGroup;
 import cn.hhfarcry.springbootmybatis.example.service.IUserService;
 import io.swagger.annotations.*;
-import org.apache.shiro.authz.annotation.Logical;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

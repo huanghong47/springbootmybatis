@@ -1,9 +1,8 @@
 package cn.hhfarcry.springbootmybatis.common.upload;
 
-import cn.hhfarcry.springbootmybatis.common.entity.BaseEntity;
-import cn.hhfarcry.springbootmybatis.common.utils.ParamUtils;
-import cn.hhfarcry.springbootmybatis.common.utils.UUIDUtils;
-import cn.hhfarcry.springbootmybatis.common.vo.ResponseVO;
+import cn.hhfarcry.springbootmybatis.common.base.utils.ParamUtils;
+import cn.hhfarcry.springbootmybatis.common.base.utils.UUIDUtils;
+import cn.hhfarcry.springbootmybatis.common.base.vo.ResponseVO;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

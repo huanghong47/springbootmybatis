@@ -1,6 +1,6 @@
 package cn.hhfarcry.springbootmybatis.common.upload;
 
-import cn.hhfarcry.springbootmybatis.common.dao.BaseDao;
+import cn.hhfarcry.springbootmybatis.common.base.dao.BaseDao;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

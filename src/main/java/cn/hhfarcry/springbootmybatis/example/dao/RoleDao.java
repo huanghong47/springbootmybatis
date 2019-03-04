@@ -1,6 +1,6 @@
 package cn.hhfarcry.springbootmybatis.example.dao;
 
-import cn.hhfarcry.springbootmybatis.common.dao.BaseDao;
+import cn.hhfarcry.springbootmybatis.common.base.dao.BaseDao;
 import cn.hhfarcry.springbootmybatis.example.entity.RoleEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;

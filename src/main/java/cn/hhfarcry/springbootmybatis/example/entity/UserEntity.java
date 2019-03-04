@@ -1,7 +1,7 @@
 package cn.hhfarcry.springbootmybatis.example.entity;
 
 
-import cn.hhfarcry.springbootmybatis.common.entity.BaseEntity;
+import cn.hhfarcry.springbootmybatis.common.base.entity.BaseEntity;
 import cn.hhfarcry.springbootmybatis.example.entity.valid.UserAddGroup;
 import cn.hhfarcry.springbootmybatis.example.entity.valid.UserLoginGroup;
 import io.swagger.annotations.ApiModelProperty;
