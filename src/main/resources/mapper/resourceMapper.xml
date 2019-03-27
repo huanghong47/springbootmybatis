@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cn.boccaccio.emsog.example.dao.ResourceDao">
+<mapper namespace="cn.hhfarcry.springbootmybatis.example.dao.ResourceDao">
     <sql id="allcolumn">
         id
         ,is_deleted
@@ -30,7 +30,7 @@
         ,#{resourceUrl}
     </sql>
 
-    <select id="selectByEntity" resultType="cn.boccaccio.emsog.example.entity.ResourceEntity" parameterType="map">
+    <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity" parameterType="map">
         select <include refid="allcolumn"></include>
         from t_resource
         <where>
@@ -60,7 +60,7 @@
     </select>
 
 
-    <insert id="insertOrUpdateByEntity" parameterType="cn.boccaccio.emsog.example.entity.ResourceEntity">
+    <insert id="insertOrUpdateByEntity" parameterType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity">
         insert into t_resource
         (id
         ,is_deleted
@@ -89,7 +89,7 @@
         ,resource_url = #{resourceUrl}
     </insert>
 
-    <select id="getResourcesByRoleId" parameterType="Integer" resultType="cn.boccaccio.emsog.example.entity.ResourceEntity">
+    <select id="getResourcesByRoleId" parameterType="Integer" resultType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity">
         select
             resource.id
             ,resource.is_deleted
@@ -108,7 +108,7 @@
         where rr.role_id = #{0}
     </select>
 
-    <select id="getResourcesByUserId" parameterType="Integer" resultType="cn.boccaccio.emsog.example.entity.ResourceEntity">
+    <select id="getResourcesByUserId" parameterType="Integer" resultType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity">
         select
             resource.id
             ,resource.is_deleted
@@ -129,7 +129,7 @@
         where ur.user_id = #{0}
     </select>
 
-    <select id="getResourcesByResourceIds" resultType="cn.boccaccio.emsog.example.entity.ResourceEntity" parameterType="java.util.List">
+    <select id="getResourcesByResourceIds" resultType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity" parameterType="java.util.List">
         select <include refid="allcolumn"></include>
         from t_resource
         where id in

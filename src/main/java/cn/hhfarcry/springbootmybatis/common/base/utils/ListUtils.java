@@ -1,4 +1,4 @@
-package cn.hhfarcry.springbootmybatis.common.base.utils;//package cn.boccaccio.emsog.common.base.utils;
+package cn.hhfarcry.springbootmybatis.common.base.utils;//package cn.hhfarcry.springbootmybatis.common.base.utils;
 //
 //import java.util.List;
 //

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cn.boccaccio.emsog.example.dao.RoleDao">
+<mapper namespace="cn.hhfarcry.springbootmybatis.example.dao.RoleDao">
     <sql id="allcolumn">
         id
         ,is_deleted
@@ -26,7 +26,7 @@
         ,#{roleName}
     </sql>
 
-    <select id="selectByEntity" resultType="cn.boccaccio.emsog.example.entity.RoleEntity" parameterType="map">
+    <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.example.entity.RoleEntity" parameterType="map">
         select <include refid="allcolumn"></include>
         from t_role
         <where>
@@ -46,13 +46,13 @@
         </where>
     </select>
 
-    <select id="getOne" resultType="cn.boccaccio.emsog.example.entity.RoleEntity" parameterType="java.lang.Integer">
+    <select id="getOne" resultType="cn.hhfarcry.springbootmybatis.example.entity.RoleEntity" parameterType="java.lang.Integer">
         select <include refid="allcolumn"></include>
         from t_role
         where id = #{0}
     </select>
 
-    <insert id="insertOrUpdateByEntity" parameterType="cn.boccaccio.emsog.example.entity.RoleEntity">
+    <insert id="insertOrUpdateByEntity" parameterType="cn.hhfarcry.springbootmybatis.example.entity.RoleEntity">
         insert into t_role
         (id
         ,is_deleted
@@ -75,7 +75,7 @@
         ,role_name = #{roleName}
     </insert>
 
-    <select id="getRolesByUserId" parameterType="Integer" resultType="cn.boccaccio.emsog.example.entity.RoleEntity">
+    <select id="getRolesByUserId" parameterType="Integer" resultType="cn.hhfarcry.springbootmybatis.example.entity.RoleEntity">
         select
         role.id
         ,role.is_deleted
@@ -92,7 +92,7 @@
         where ur.user_id = #{0}
     </select>
 
-    <select id="getRolesByRoleids" resultType="cn.boccaccio.emsog.example.entity.RoleEntity" parameterType="java.util.List">
+    <select id="getRolesByRoleids" resultType="cn.hhfarcry.springbootmybatis.example.entity.RoleEntity" parameterType="java.util.List">
         select <include refid="allcolumn"></include>
         from t_role
         where id in

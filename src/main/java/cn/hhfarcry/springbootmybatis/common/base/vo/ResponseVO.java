@@ -13,9 +13,8 @@ import java.util.List;
  * @author: huanghong
  * @date: 2019-01-10 10:21
  */
-@ApiIgnore
 public class ResponseVO {
-
+//
     public static final String MESSAGE_OK = "ok";
     public static final String MESSAGE_FAILED = "操作失败";
     public static final String MESSAGE_LAKE_PARAMETER = "缺少参数";
@@ -40,6 +39,7 @@ public class ResponseVO {
     @Getter @Setter private String msg;
     @Getter @Setter private Long count;
     @Getter @Setter private Object data;
+    @Getter @Setter private Long currenttime;
 
     public ResponseVO() {}
 
@@ -47,6 +47,10 @@ public class ResponseVO {
         this.code = code;
         this.msg = msg;
         this.count = count;
+        this.data = data;
+    }
+
+    public ResponseVO(Object data) {
         this.data = data;
     }
 

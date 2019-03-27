@@ -7,12 +7,14 @@ import cn.hhfarcry.springbootmybatis.common.base.utils.ParamUtils;
 import cn.hhfarcry.springbootmybatis.common.base.utils.ValidateUtil;
 import cn.hhfarcry.springbootmybatis.common.base.vo.ResponseVO;
 import cn.hhfarcry.springbootmybatis.example.entity.UserEntity;
+import cn.hhfarcry.springbootmybatis.example.entity.valid.UserAddGroup;
 import cn.hhfarcry.springbootmybatis.example.service.IUserService;
 import com.github.pagehelper.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,13 +46,13 @@ public class UserController extends BaseController {
     @PostMapping(value = "/add")
     @ResponseBody
 //    @RequiresPermissions(logical = Logical.AND, value = {"user/save"})
-    public ResponseVO save(@RequestBody UserEntity userEntity){
+    public ResponseVO save(@Validated(UserAddGroup.class) @RequestBody UserEntity userEntity){
         try {
-            if(ParamUtils.isBlank(userEntity.getUserName())
-                    || ParamUtils.isBlank(userEntity.getPassword())
-                    || ParamUtils.isBlank(userEntity.getPhone())){
-                return new ResponseVO(ResponseVO.MESSAGE_LAKE_PARAMETER);
-            }
+//            if(ParamUtils.isBlank(userEntity.getUserName())
+//                    || ParamUtils.isBlank(userEntity.getPassword())
+//                    || ParamUtils.isBlank(userEntity.getPhone())){
+//                return new ResponseVO(ResponseVO.MESSAGE_LAKE_PARAMETER);
+//            }
             if(!ValidateUtil.validatePwd(userEntity.getPassword())){
                 return new ResponseVO("密码规则不符合(6-16位字母,数字)");
             }

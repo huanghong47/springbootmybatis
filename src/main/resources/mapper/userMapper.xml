@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cn.boccaccio.emsog.example.dao.UserDao">
+<mapper namespace="cn.hhfarcry.springbootmybatis.example.dao.UserDao">
     <sql id="allcolumn">
         id
         ,is_deleted
@@ -30,7 +30,7 @@
         ,#{phone}
     </sql>
 
-    <insert id="insertOrUpdateByEntity" parameterType="cn.boccaccio.emsog.example.entity.UserEntity">
+    <insert id="insertOrUpdateByEntity" parameterType="cn.hhfarcry.springbootmybatis.example.entity.UserEntity">
         insert into t_user
         (id
         ,is_deleted
@@ -60,7 +60,7 @@
     </insert>
 
 
-    <update id="updateByEntity" parameterType="cn.boccaccio.emsog.example.entity.UserEntity">
+    <update id="updateByEntity" parameterType="cn.hhfarcry.springbootmybatis.example.entity.UserEntity">
         update t_user
         <trim prefix="set" suffixOverrides=",">
             <if test=" updateUserUuid != null">
@@ -82,7 +82,7 @@
         where id = #{id}
     </update>
 
-    <select id="selectByEntity" resultType="cn.boccaccio.emsog.example.entity.UserEntity" parameterType="map">
+    <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.example.entity.UserEntity" parameterType="map">
         select <include refid="allcolumn"></include>
         from t_user
         <where>
@@ -101,7 +101,7 @@
             </if>
         </where>
     </select>
-    <select id="getOne" resultType="cn.boccaccio.emsog.example.entity.UserEntity" parameterType="java.lang.Integer">
+    <select id="getOne" resultType="cn.hhfarcry.springbootmybatis.example.entity.UserEntity" parameterType="java.lang.Integer">
         select <include refid="allcolumn"></include> from t_user where is_deleted = 0 and id = #{0}
     </select>
 
@@ -112,7 +112,7 @@
         </foreach>
     </delete>
 
-    <insert id="insertByEntity" useGeneratedKeys="true" keyProperty="id" parameterType="cn.boccaccio.emsog.example.entity.UserEntity">
+    <insert id="insertByEntity" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.example.entity.UserEntity">
         insert into t_user
         (is_deleted
         ,status
