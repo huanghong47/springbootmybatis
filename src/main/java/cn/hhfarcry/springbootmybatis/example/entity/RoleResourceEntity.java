@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-15 14:19

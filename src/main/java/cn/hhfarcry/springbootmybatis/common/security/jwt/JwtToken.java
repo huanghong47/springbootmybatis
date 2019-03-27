@@ -3,7 +3,7 @@ package cn.hhfarcry.springbootmybatis.common.security.jwt;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: 自定义jwt过滤器
  * @author: huanghong
  * @date: 2019-01-16 15:05

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cn.hhfarcry.springbootmybatis.example.dao.ResourceDao">
+<mapper namespace="cn.boccaccio.emsog.example.dao.ResourceDao">
     <sql id="allcolumn">
-        uuid
+        id
         ,is_deleted
         ,status
         ,comment
@@ -17,7 +17,7 @@
     </sql>
 
     <sql id="allcolumn2">
-        #{uuid}
+        #{id}
         ,#{isDeleted}
         ,#{status}
         ,#{comment}
@@ -30,29 +30,39 @@
         ,#{resourceUrl}
     </sql>
 
-    <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity" parameterType="map">
-        select id,<include refid="allcolumn"></include>
+    <select id="selectByEntity" resultType="cn.boccaccio.emsog.example.entity.ResourceEntity" parameterType="map">
+        select <include refid="allcolumn"></include>
         from t_resource
         <where>
-            <if test=" uuid != null and uuid != '' ">
-                and uuid = #{uuid}
+            and is_deleted = 0
+            <if test=" id != null  ">
+                and id = #{id}
             </if>
-            <if test=" status != null and status != '' ">
+            <if test=" status != null ">
                 and status = #{status}
             </if>
-            <if test=" name != null and name != '' ">
+            <if test=" resourceName != null and resourceName != '' ">
                 and resource_name = #{resourceName}
             </if>
-            <!--<if test=" name != null and name != '' ">-->
-                <!--and name  like CONCAT('%' , #{name} , '%')-->
-            <!--</if>-->
+            <if test=" resourceNameLike != null and resourceNameLike != '' ">
+                and resource_name  like CONCAT('%' , #{resourceNameLike} , '%')
+            </if>
+            <if test=" resourceUrl != null and resourceUrl != '' ">
+                and resource_url = #{resourceUrl}
+            </if>
+            <if test=" resourceUrlLike != null and resourceUrlLike != '' ">
+                and resource_url  like CONCAT('%' , #{resourceUrlLike} , '%')
+            </if>
+            <if test=" resourceType != null ">
+                and resource_type = #{resourceType}
+            </if>
         </where>
     </select>
 
 
-    <insert id="insertOrUpdateByEntity" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity">
+    <insert id="insertOrUpdateByEntity" parameterType="cn.boccaccio.emsog.example.entity.ResourceEntity">
         insert into t_resource
-        (uuid
+        (id
         ,is_deleted
         ,status
         ,comment
@@ -62,7 +72,7 @@
         ,resource_type
         ,resource_url)
         values
-        (#{uuid}
+        (#{id}
         ,#{isDeleted}
         ,#{status}
         ,#{comment}
@@ -74,12 +84,14 @@
         on duplicate key update
         update_user_uuid = #{updateUserUuid}
         ,update_time = current_timestamp
+        ,resource_name = #{resourceName}
+        ,resource_type = #{resourceType}
+        ,resource_url = #{resourceUrl}
     </insert>
 
-    <select id="getResourcesByRoleId" parameterType="Integer" resultType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity">
+    <select id="getResourcesByRoleId" parameterType="Integer" resultType="cn.boccaccio.emsog.example.entity.ResourceEntity">
         select
             resource.id
-            ,resource.uuid
             ,resource.is_deleted
             ,resource.status
             ,resource.comment
@@ -96,10 +108,9 @@
         where rr.role_id = #{0}
     </select>
 
-    <select id="getResourcesByUserId" parameterType="Integer" resultType="cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity">
+    <select id="getResourcesByUserId" parameterType="Integer" resultType="cn.boccaccio.emsog.example.entity.ResourceEntity">
         select
             resource.id
-            ,resource.uuid
             ,resource.is_deleted
             ,resource.status
             ,resource.comment
@@ -118,5 +129,13 @@
         where ur.user_id = #{0}
     </select>
 
+    <select id="getResourcesByResourceIds" resultType="cn.boccaccio.emsog.example.entity.ResourceEntity" parameterType="java.util.List">
+        select <include refid="allcolumn"></include>
+        from t_resource
+        where id in
+        <foreach collection="list" index="i" separator="," open="(" close=")" item="id">
+            #{id}
+        </foreach>
+    </select>
 
 </mapper>

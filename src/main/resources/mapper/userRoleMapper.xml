@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cn.hhfarcry.springbootmybatis.example.dao.UserRoleDao">
+<mapper namespace="cn.boccaccio.emsog.example.dao.UserRoleDao">
     <sql id="allcolumn">
         id
         ,user_id
@@ -14,20 +14,20 @@
        ,#{roleId}
     </sql>
 
-    <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.example.entity.UserRoleEntity" parameterType="map">
+    <select id="selectByEntity" resultType="cn.boccaccio.emsog.example.entity.UserRoleEntity" parameterType="map">
         select <include refid="allcolumn"></include>
         from t_user_role
         <where>
-            <if test="userId != null and userId != ''">
+            <if test="userId != null ">
                 and user_id = #{userId}
             </if>
-            <if test="roleId != null and roleId != ''">
+            <if test="roleId != null and ">
                 and role_id = #{roleId}
             </if>
         </where>
     </select>
 
-    <insert id="insertUserRole" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.example.entity.UserRoleEntity">
+    <insert id="insertUserRole" useGeneratedKeys="true" keyProperty="id" parameterType="cn.boccaccio.emsog.example.entity.UserRoleEntity">
         insert into t_user_role
         (id
         ,user_id

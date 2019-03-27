@@ -12,7 +12,9 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class HttpClientUtils {
 
@@ -23,7 +25,7 @@ public class HttpClientUtils {
     private static final int CONNECT_TIMEOUT = 6000;
 
     // 请求获取数据的超时时间(即响应时间)，单位毫秒。
-    private static final int SOCKET_TIMEOUT = 6000;
+    private static final int SOCKET_TIMEOUT = 120000;
 
     /**
      * 发送get请求；不带请求头和请求参数

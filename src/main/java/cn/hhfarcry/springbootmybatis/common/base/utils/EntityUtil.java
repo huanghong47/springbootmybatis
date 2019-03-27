@@ -16,7 +16,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-16 08:57
@@ -146,4 +146,25 @@ public class EntityUtil {
             }
         }
     };
+
+
+    public static Map<String,Object> getParams(String keyvalues){
+        String []params = keyvalues.split(",");
+        Map<String,Object> maps = new HashMap<>();
+        for (int i=0;i<params.length;i++) {
+            maps.put(params[i],params[i+1]);
+            i++;
+        }
+        return maps;
+    }
+
+    public static void main(String[] args) {
+        String keyvalues = "a,b,c,d,e,f";
+        Map<String,Object> maps = getParams(keyvalues);
+        for (Map.Entry<String, Object> stringObjectEntry : maps.entrySet()) {
+            System.out.println(stringObjectEntry.getKey());
+            System.out.println(stringObjectEntry.getValue());
+            System.out.println("--------------------");
+        }
+    }
 }

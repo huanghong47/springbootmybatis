@@ -1,15 +1,18 @@
 package cn.hhfarcry.springbootmybatis.common.security.shiro;
 
-import cn.hhfarcry.springbootmybatis.common.redis.Constant;
-import cn.hhfarcry.springbootmybatis.common.security.jwt.JwtUtil;
-import cn.hhfarcry.springbootmybatis.common.redis.JedisUtil;
+
 import cn.hhfarcry.springbootmybatis.common.base.utils.ParamUtils;
+import cn.hhfarcry.springbootmybatis.common.redis.Constant;
+import cn.hhfarcry.springbootmybatis.common.redis.JedisUtil;
+import cn.hhfarcry.springbootmybatis.common.security.jwt.JwtToken;
+import cn.hhfarcry.springbootmybatis.common.security.jwt.JwtUtil;
 import cn.hhfarcry.springbootmybatis.example.dao.ResourceDao;
 import cn.hhfarcry.springbootmybatis.example.dao.RoleDao;
 import cn.hhfarcry.springbootmybatis.example.dao.UserDao;
 import cn.hhfarcry.springbootmybatis.example.entity.ResourceEntity;
 import cn.hhfarcry.springbootmybatis.example.entity.RoleEntity;
 import cn.hhfarcry.springbootmybatis.example.entity.UserEntity;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -20,16 +23,15 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.hhfarcry.springbootmybatis.common.security.jwt.JwtToken;
-import org.springframework.util.CollectionUtils;
-
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-16 16:14
@@ -74,7 +76,7 @@ public class UserRealm extends AuthorizingRealm {
         }
         List<ResourceEntity> resources = resourceDao.getResourcesByUserId(userEntitys.get(0).getId());
         for (ResourceEntity resource : resources) {
-            simpleAuthorizationInfo.addStringPermission(resource.getResourceName());
+            simpleAuthorizationInfo.addStringPermission(resource.getResourceUrl());
         }
         return simpleAuthorizationInfo;
     }
@@ -84,7 +86,14 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
-        String token = (String) auth.getCredentials();
+        String tokenbs = (String) auth.getCredentials();//此token是被后台处理过的
+        String token1 = tokenbs.substring(0,tokenbs.indexOf(".")+1);
+        String token2 = tokenbs.substring(tokenbs.indexOf(".")+1,tokenbs.lastIndexOf("."));
+        String token3 = tokenbs.substring(tokenbs.lastIndexOf("."),tokenbs.length());
+        String payload = new String(Base64.decodeBase64(token2),StandardCharsets.UTF_8);
+        String token22 = Base64.encodeBase64URLSafeString(payload.getBytes(StandardCharsets.UTF_8));
+        String token = token1+token22+token3;
+
         // 解密获得account，用于和数据库进行对比
         String userName = JwtUtil.getClaim(token, Constant.JWTACCOUNT);
         // 帐号为空

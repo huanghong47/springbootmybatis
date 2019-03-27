@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-16 15:41

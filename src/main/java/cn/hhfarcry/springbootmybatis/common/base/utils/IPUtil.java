@@ -8,7 +8,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-18 13:58

@@ -1,9 +1,10 @@
 package cn.hhfarcry.springbootmybatis.common.security;
 
-import cn.hhfarcry.springbootmybatis.common.redis.Constant;
-import cn.hhfarcry.springbootmybatis.common.security.jwt.JwtUtil;
+
 import cn.hhfarcry.springbootmybatis.common.base.utils.IPUtil;
 import cn.hhfarcry.springbootmybatis.common.base.utils.ParamUtils;
+import cn.hhfarcry.springbootmybatis.common.redis.Constant;
+import cn.hhfarcry.springbootmybatis.common.security.jwt.JwtUtil;
 import cn.hhfarcry.springbootmybatis.example.dao.UserDao;
 import cn.hhfarcry.springbootmybatis.example.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-18 14:19
@@ -32,14 +33,14 @@ public class SecurityService {
 
 
     @Autowired
-    private  UserDao userDao;
+    private UserDao userDao;
 
     public  String getToken(){
         return request.getHeader("Authorization");
     }
 
     //获取当前操作用户
-    public  UserEntity getUser(){
+    public UserEntity getUser(){
         String token = getToken();
         UserEntity curUser = null;
         if(ParamUtils.isNotBlank(token)){

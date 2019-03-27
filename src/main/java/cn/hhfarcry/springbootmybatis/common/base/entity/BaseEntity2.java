@@ -13,15 +13,11 @@ import java.util.Date;
  * @author: huanghong
  * @date: 2019-01-10 10:27
  */
-public class BaseEntity extends PageVO {
+public class BaseEntity2 extends PageVO {
 
-    /**
-     * 主键采用自增id还是uuid根据业务场景而定
-     */
-    @ApiModelProperty(value="主键id",name="id",example="1")
+    @ApiModelProperty(value="uuid",name="uuid",example="1")
     @Setter@Getter
-    private Integer id;
-
+    private String uuid;
 
     @ApiModelProperty(value="0:有效数据;-1:无效/被删除的数据",name="isDeleted",example="-1")
     @Setter@Getter
@@ -33,7 +29,7 @@ public class BaseEntity extends PageVO {
 
     @ApiModelProperty(value="创建人id",name="createUserUuid",example="xxx")
     @Setter@Getter
-    private Integer createUserId;
+    private String createUserUuid;
 
     @ApiModelProperty(value="创建时间",name="createTime",example="2018-01-01 00:00:00")
     @Setter@Getter
@@ -41,7 +37,7 @@ public class BaseEntity extends PageVO {
 
     @ApiModelProperty(value="修改人id",name="createUserUuid",example="xxx")
     @Setter@Getter
-    private Integer updateUserId;
+    private String updateUserUuid;
 
     @ApiModelProperty(value="修改时间",name="createTime",example="2018-01-01 00:00:00")
     @Setter@Getter

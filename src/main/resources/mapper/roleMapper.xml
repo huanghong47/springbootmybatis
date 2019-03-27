@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cn.hhfarcry.springbootmybatis.example.dao.RoleDao">
+<mapper namespace="cn.boccaccio.emsog.example.dao.RoleDao">
     <sql id="allcolumn">
-        uuid
+        id
         ,is_deleted
         ,status
         ,comment
@@ -15,7 +15,7 @@
     </sql>
 
     <sql id="allcolumn2">
-        #{uuid}
+        #{id}
         ,#{isDeleted}
         ,#{status}
         ,#{comment}
@@ -26,28 +26,35 @@
         ,#{roleName}
     </sql>
 
-    <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.example.entity.RoleEntity" parameterType="map">
-        select id,<include refid="allcolumn"></include>
+    <select id="selectByEntity" resultType="cn.boccaccio.emsog.example.entity.RoleEntity" parameterType="map">
+        select <include refid="allcolumn"></include>
         from t_role
         <where>
-            <if test=" uuid != null and uuid != '' ">
-                and uuid = #{uuid}
+            and is_deleted = 0
+            <if test=" id != null  ">
+                and id = #{id}
             </if>
-            <if test=" status != null and status != '' ">
+            <if test=" status != null ">
                 and status = #{status}
             </if>
-            <if test=" name != null and name != '' ">
+            <if test=" roleName != null and roleName != '' ">
                 and role_name = #{roleName}
             </if>
-            <!--<if test=" name != null and name != '' ">-->
-                <!--and name  like CONCAT('%' , #{name} , '%')-->
-            <!--</if>-->
+            <if test=" roleNameLike != null and roleNameLike != '' ">
+                and role_name  like CONCAT('%' , #{roleNameLike} , '%')
+            </if>
         </where>
     </select>
 
-    <insert id="insertOrUpdateByEntity" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.example.entity.RoleEntity">
+    <select id="getOne" resultType="cn.boccaccio.emsog.example.entity.RoleEntity" parameterType="java.lang.Integer">
+        select <include refid="allcolumn"></include>
+        from t_role
+        where id = #{0}
+    </select>
+
+    <insert id="insertOrUpdateByEntity" parameterType="cn.boccaccio.emsog.example.entity.RoleEntity">
         insert into t_role
-        (uuid
+        (id
         ,is_deleted
         ,status
         ,comment
@@ -55,7 +62,7 @@
         ,create_time
         ,role_name)
         values
-        (#{uuid}
+        (#{id}
         ,#{isDeleted}
         ,#{status}
         ,#{comment}
@@ -65,12 +72,12 @@
         on duplicate key update
         update_user_uuid = #{updateUserUuid}
         ,update_time = current_timestamp
+        ,role_name = #{roleName}
     </insert>
 
-    <select id="getRolesByUserId" parameterType="Integer" resultType="cn.hhfarcry.springbootmybatis.example.entity.RoleEntity">
+    <select id="getRolesByUserId" parameterType="Integer" resultType="cn.boccaccio.emsog.example.entity.RoleEntity">
         select
         role.id
-        ,role.uuid
         ,role.is_deleted
         ,role.status
         ,role.comment
@@ -83,5 +90,14 @@
         left join t_user_role ur
         on role.id = ur.role_id
         where ur.user_id = #{0}
+    </select>
+
+    <select id="getRolesByRoleids" resultType="cn.boccaccio.emsog.example.entity.RoleEntity" parameterType="java.util.List">
+        select <include refid="allcolumn"></include>
+        from t_role
+        where id in
+        <foreach collection="list" item="id" separator="," open="(" close=")" index="i">
+            #{id}
+        </foreach>
     </select>
 </mapper>

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-15 14:32
@@ -18,7 +18,10 @@ import java.util.Map;
 @Mapper
 public interface RoleResourceDao {
     int insertRoleResource(RoleResourceEntity param);
-    List<RoleResourceEntity> selectByEntity(Map<String,String> param);
-    int insertRoleResources(List<RoleResourceEntity>roleResources);
+    List<RoleResourceEntity> selectByEntity(Map<String, String> param);
+    List<Integer> getlistByresourceid(Integer resourceid);
+    int insertRoleResources(List<RoleResourceEntity> roleResources);
     int deleteRoleResources(Integer roleId);
+    int deleteInbatchRoleResources(List<Integer> roleId);
+
 }

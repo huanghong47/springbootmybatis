@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-15 14:32
@@ -16,7 +16,19 @@ import java.util.List;
 @Repository
 @Mapper
 public interface ResourceDao extends BaseDao<ResourceEntity> {
-
+    /**
+     * 根据角色id查询资源列表
+     * @param roleId
+     * @return
+     */
     List<ResourceEntity>getResourcesByRoleId(Integer roleId);
+
+    /**
+     * 根据用户id查询资源列表
+     * @param userId
+     * @return
+     */
     List<ResourceEntity>getResourcesByUserId(Integer userId);
+
+    List<ResourceEntity>getResourcesByResourceIds(List<Integer> resourceids);
 }

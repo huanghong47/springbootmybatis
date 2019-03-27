@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-16 11:20
@@ -34,10 +34,21 @@ public class ResourceController extends BaseController {
     @Autowired
     private IResourceService resourceService;
 
-    @RequestMapping(value = "/save" ,method = {RequestMethod.GET,RequestMethod.POST})
+    /**
+     * 资源新增和编辑
+     * @param resourceEntity
+     * @return
+     */
+    @RequestMapping(value = "/save" ,method = {RequestMethod.POST})
     @ResponseBody
+//    @RequiresPermissions(logical = Logical.AND, value = {"resource/save"})
     public ResponseVO save(@RequestBody ResourceEntity resourceEntity){
         try {
+            if(ParamUtils.isBlank(resourceEntity.getResourceName())
+                    || ParamUtils.isBlank(resourceEntity.getResourceType())
+                    || ParamUtils.isBlank(resourceEntity.getResourceUrl())){
+                return new ResponseVO(ResponseVO.MESSAGE_LAKE_PARAMETER);
+            }
             return new ResponseVO(resourceService.insertResource(resourceEntity));
         } catch (Exception e) {
             logger.error("controller error at {} --> {}", this.getClass().getName(), e);
@@ -45,8 +56,15 @@ public class ResourceController extends BaseController {
         }
     }
 
+    /**
+     * 资源列表查询
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/getpage" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
+//    @RequiresPermissions(logical = Logical.AND, value = {"resource/getpage"})
     public ResponseVO getPage(HttpServletRequest request, HttpServletResponse response){
         try {
             Map<String,Object> param = EntityUtil.arraymapTobjectmap(request.getParameterMap());
@@ -57,24 +75,66 @@ public class ResourceController extends BaseController {
         }
     }
 
+    /**
+     * 根据角色获取资源列表
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/getResourcesByRoleId" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public ResponseVO getResourcesByRoleId(HttpServletRequest request, HttpServletResponse response){
         try {
             String roleId = request.getParameter("roleId");
-            return new ResponseVO(resourceService.getResourcesByRoleId(ParamUtils.strTIntger(roleId)));
+            if(ParamUtils.isBlank(ParamUtils.strTIntger(roleId))){
+                return new ResponseVO(ResponseVO.MESSAGE_LAKE_PARAMETER);
+            }
+            return new ResponseVO(resourceService.getResourcesByRoleId(roleId));
         } catch (Exception e) {
             logger.error("controller error at {} --> {}", this.getClass().getName(), e);
             return new ResponseVO(ResponseVO.MESSAGE_SYSTEM_ERROR);
         }
     }
 
+    /**
+     * 根据用户获取资源列表
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/getResourcesByUserId" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public ResponseVO getResourcesByUserId(HttpServletRequest request, HttpServletResponse response){
         try {
             String userId = request.getParameter("userId");
-            return new ResponseVO(resourceService.getResourcesByUserId(ParamUtils.strTIntger(userId)));
+            if(ParamUtils.isBlank(ParamUtils.strTIntger(userId))){
+                return new ResponseVO(ResponseVO.MESSAGE_LAKE_PARAMETER);
+            }
+            return new ResponseVO(resourceService.getResourcesByUserId(userId));
+        } catch (Exception e) {
+            logger.error("controller error at {} --> {}", this.getClass().getName(), e);
+            return new ResponseVO(ResponseVO.MESSAGE_SYSTEM_ERROR);
+        }
+    }
+
+
+    /**
+     * 绑定前后端资源
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/bindfrontbackres" ,method = {RequestMethod.POST})
+    @ResponseBody
+    public ResponseVO bindfrontbackres(HttpServletRequest request){
+        try {
+            String frontId = request.getParameter("frontId");
+            String backIds = request.getParameter("backIds");
+
+            if(ParamUtils.isBlank(ParamUtils.strTIntger(frontId))
+                    || ParamUtils.isBlank(ParamUtils.strTListintger(backIds,","))){
+                return new ResponseVO(ResponseVO.MESSAGE_LAKE_PARAMETER);
+            }
+            return new ResponseVO(resourceService.bindfbresources(ParamUtils.strTIntger(frontId),ParamUtils.strTListintger(backIds,",")));
         } catch (Exception e) {
             logger.error("controller error at {} --> {}", this.getClass().getName(), e);
             return new ResponseVO(ResponseVO.MESSAGE_SYSTEM_ERROR);

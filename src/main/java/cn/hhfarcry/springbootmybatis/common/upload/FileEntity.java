@@ -1,6 +1,7 @@
 package cn.hhfarcry.springbootmybatis.common.upload;
 
 import cn.hhfarcry.springbootmybatis.common.base.entity.BaseEntity;
+import cn.hhfarcry.springbootmybatis.common.base.entity.BaseEntity2;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

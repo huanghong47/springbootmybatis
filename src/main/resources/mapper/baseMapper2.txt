@@ -3,36 +3,37 @@
 
 <mapper namespace="cn.boccaccio.emsog.example.dao.XXXDao">
     <sql id="allcolumn">
-        id
+        uuid
         ,is_deleted
         ,comment
-        ,create_user_id
+        ,create_user_uuid
         ,create_time
-        ,update_user_id
+        ,update_user_uuid
         ,update_time
     </sql>
 
     <sql id="allcolumn2">
-        #{id}
+        #{uuid}
         ,#{isDeleted}
         ,#{comment}
-        ,#{createUserId}
+        ,#{createUserUuid}
         ,#{createTime}
-        ,#{updateUserId}
+        ,#{updateUserUuid}
         ,#{updateTime}
     </sql>
 
-    <insert id="insertByEntity" useGeneratedKeys="true" keyProperty="id" parameterType="cn.boccaccio.emsog.example.entity.XXXEntity">
+    <insert id="insertByEntity"  parameterType="cn.boccaccio.emsog.example.entity.XXXEntity">
         insert into t_xxx
-        (is_deleted
+        (uuid
+        ,is_deleted
         ,comment
-        ,create_user_id
+        ,create_user_uuid
         ,create_time
         )
         values
         (#{isDeleted}
         ,#{comment}
-        ,#{createUserId}
+        ,#{createUserUuid}
         ,#{createTime}
         )
     </insert>
@@ -43,33 +44,33 @@
             <if test=" comment != null and comment != ''">
                 comment = #{comment},
             </if>
-            <if test=" updateUserId != null">
-                update_user_id = #{updateUserId},
+            <if test=" updateUserUuid != null">
+                update_user_uuid = #{updateUserUuid},
             </if>
             <if test=" updateTime != null">
                 update_time = #{updateTime},
             </if>
         </trim>
-        where id = #{id}
+        where uuid = #{uuid}
     </update>
 
     <insert id="insertOrUpdateByEntity" parameterType="cn.boccaccio.emsog.example.entity.XXXEntity">
         insert into t_xxx
-        (id
+        (uuid
         ,is_deleted
         ,comment
-        ,create_user_id
+        ,create_user_uuid
         ,create_time
         )
         values
-        (#{id}
+        (#{uuid}
         ,#{isDeleted}
         ,#{comment}
-        ,#{createUserId}
+        ,#{createUserUuid}
         ,#{createTime}
         )
         on duplicate key update
-		    update_user_id = #{updateUserId}
+		    update_user_uuid = #{updateUserUuid}
 		    ,update_time = current_timestamp
 		    ,comment = #{comment}
     </insert>
@@ -78,17 +79,17 @@
         insert into t_xxx
         (is_deleted
         ,comment
-        ,create_user_id
+        ,create_user_uuid
         ,create_time
-        ,update_user_id
+        ,update_user_uuid
         ,update_time)
         values
         <foreach collection="list" item="i" separator="," open="(",close=")">
             #{i.isDeleted}
             ,#{i.comment}
-            ,#{i.createUserId}
+            ,#{i.createUserUuid}
             ,#{i.createTime}
-            ,#{i.updateUserId}
+            ,#{i.updateUserUuid}
             ,#{i.updateTime}
         </foreach>
     </insert>
@@ -98,8 +99,8 @@
         from t_xxx
         <where>
                 and is_deleted = 0
-            <if test=" id != null ">
-                and id = #{id}
+            <if test=" uuid != null and uuid != ''">
+                and uuid = #{uuid}
             </if>
             <!--<if test=" entName != null and entName != '' ">-->
                 <!--and ent_name like CONCAT('%' , #{entName} , '%')-->
@@ -107,21 +108,21 @@
         </where>
     </select>
 
-    <select id="getOne" resultType="cn.boccaccio.emsog.example.entity.XXXEntity" parameterType="java.lang.Integer">
-        select <include refid="allcolumn"></include> from t_xxx where id = #{0} and is_deleted = 0
+    <select id="getOne" resultType="cn.boccaccio.emsog.example.entity.XXXEntity" parameterType="java.lang.String">
+        select <include refid="allcolumn"></include> from t_xxx where uuid = #{0} and is_deleted = 0
     </select>
 
     <update id="softDeleteBatch" parameterType="java.util.List">
-        update  t_xxx set is_deleted = -1 where id in
-        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
-            #{id}
+        update  t_xxx set is_deleted = -1 where uuid in
+        <foreach collection="list" item="uuid" index="index" open="(" close=")" separator=",">
+            #{uuid}
         </foreach>
     </update>
 
     <delete id="hardDeleteBatch" parameterType="java.util.List">
-        delete from  t_xxx  where id in
-        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
-            #{id}
+        delete from  t_xxx  where uuid in
+        <foreach collection="list" item="uuid" index="index" open="(" close=")" separator=",">
+            #{uuid}
         </foreach>
     </delete>
 </mapper>

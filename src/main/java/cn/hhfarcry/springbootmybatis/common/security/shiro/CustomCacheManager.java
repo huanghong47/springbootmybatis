@@ -3,10 +3,9 @@ package cn.hhfarcry.springbootmybatis.common.security.shiro;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;
-import org.springframework.stereotype.Component;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-16 16:11

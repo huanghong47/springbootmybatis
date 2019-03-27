@@ -1,16 +1,17 @@
 package cn.hhfarcry.springbootmybatis.common.security.shiro;
 
-import cn.hhfarcry.springbootmybatis.common.redis.Constant;
-import cn.hhfarcry.springbootmybatis.common.security.jwt.JwtUtil;
-import cn.hhfarcry.springbootmybatis.common.redis.JedisUtil;
+
 import cn.hhfarcry.springbootmybatis.common.base.utils.SerializableUtil;
+import cn.hhfarcry.springbootmybatis.common.redis.Constant;
+import cn.hhfarcry.springbootmybatis.common.redis.JedisUtil;
+import cn.hhfarcry.springbootmybatis.common.security.jwt.JwtUtil;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 
 import java.util.*;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-16 16:07

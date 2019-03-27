@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: 校验参数,参数转换工具
  * @author: huanghong
  * @date: 2019-01-10 13:36
@@ -135,6 +135,17 @@ public class ParamUtils {
      */
     public static List<Integer> strTListintger(String param,String reg){
         List<String> strlist = strTListstr(param,reg);
+        List<Integer> result = new ArrayList<>();
+        if(CollectionUtils.isNotEmpty(strlist)){
+            for (String s : strlist) {
+                Integer i = strTIntger(s);
+                result.add(i);
+            }
+        }
+        return result;
+    }
+
+    public static List<Integer> strlisttointlist(List<String>strlist){
         List<Integer> result = new ArrayList<>();
         if(CollectionUtils.isNotEmpty(strlist)){
             for (String s : strlist) {

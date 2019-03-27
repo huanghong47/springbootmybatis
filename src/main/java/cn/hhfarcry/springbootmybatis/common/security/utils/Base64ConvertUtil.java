@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-16 14:42

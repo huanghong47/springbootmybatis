@@ -61,6 +61,8 @@ public class JwtUtil {
             return true;
         } catch (UnsupportedEncodingException e) {
             LOGGER.error("JWTToken认证解密出现UnsupportedEncodingException异常:" + e.getMessage());
+        }catch (Exception e){
+            LOGGER.error("JWTToken异常:" + e.getMessage());
         }
         return false;
     }
@@ -88,7 +90,7 @@ public class JwtUtil {
      * @param currentTimeMillis
      * @return
      */
-    public static String sign(String account, String currentTimeMillis) {
+    public static String sign(String account,String userId,String currentTimeMillis) {
         try {
             // 帐号加JWT私钥加密
             String secret = account + Base64ConvertUtil.decode(encryptJWTKey);
@@ -98,6 +100,7 @@ public class JwtUtil {
             // 附带account帐号信息
             return JWT.create()
                     .withClaim(Constant.JWTACCOUNT, account)
+                    .withClaim("userId",userId)
                     .withClaim(Constant.CURRENT_TIME_MILLIS, currentTimeMillis)
                     .withExpiresAt(date)
                     .sign(algorithm);

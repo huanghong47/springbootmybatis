@@ -1,6 +1,5 @@
 package cn.hhfarcry.springbootmybatis.common.base.dao;
 
-import cn.hhfarcry.springbootmybatis.common.base.entity.BaseEntity;
 import cn.hhfarcry.springbootmybatis.common.base.entity.BaseEntity2;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.Map;
  * @author: huanghong
  * @date: 2019-01-10 11:02
  */
-public interface BaseDao <E extends BaseEntity>{
+public interface BaseDao2<E extends BaseEntity2>{
     /**
      * 查询（动态分页）
      * @param param
@@ -43,25 +42,25 @@ public interface BaseDao <E extends BaseEntity>{
      * @param entitys
      * @return
      */
-    int insertByEntityBatch(List<E>entitys);
+    int insertByEntityBatch(List<E> entitys);
 
 
     /**
      * 单条查询
-     * @param id
+     * @param uuid
      * @return
      */
-    E getOne(Integer id);
+    E getOne(String uuid);
 
     /**
      * 批量删除(软删)
-     * @param ids
+     * @param uuids
      */
-    void softDeleteBatch(List<Integer> ids);
+    void softDeleteBatch(List<String> uuids);
 
     /**
      * 批量删除(硬删)
-     * @param ids
+     * @param uuids
      */
-    void hardDeleteBatch(List<Integer> ids);
+    void hardDeleteBatch(List<String> uuids);
 }

@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-16 09:07
@@ -104,7 +104,7 @@ public class DateTimeUtils {
             sdf.applyPattern(toFormat);
             return sdf.format(date);
         } catch (Exception e) {
-            //loginstorage.error("DateTimeUtil --> 2OtherFormat error", e);
+            //loginstorge.error("DateTimeUtil --> 2OtherFormat error", e);
             return null;
         }
     }
@@ -265,6 +265,17 @@ public class DateTimeUtils {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         return c.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public static String getMonth(int year,int month){
+        Calendar c = Calendar.getInstance();
+        c.set(year,month,1);
+        String time = date2String(c.getTime(),DATETIME_FORMAT_03).substring(0,7);
+        return time;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getMonth(2018,2));
     }
 
     /**

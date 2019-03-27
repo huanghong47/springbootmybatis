@@ -1,5 +1,6 @@
 package cn.hhfarcry.springbootmybatis.common.security.shiro;
 
+
 import cn.hhfarcry.springbootmybatis.common.security.jwt.JwtFilter;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-16 16:13

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-15 14:17
@@ -14,11 +14,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ResourceEntity extends BaseEntity {
 
+    //资源名称
     @Setter@Getter private String resourceName;
 
     //(0后端资源1前端资源)
     @Setter@Getter private Integer resourceType;
 
-    //资源地址或菜单
+    //资源接口地址或菜单名称
     @Setter@Getter private String resourceUrl;
 }

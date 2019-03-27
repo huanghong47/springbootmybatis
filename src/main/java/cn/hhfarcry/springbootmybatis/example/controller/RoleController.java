@@ -1,5 +1,6 @@
 package cn.hhfarcry.springbootmybatis.example.controller;
 
+
 import cn.hhfarcry.springbootmybatis.common.base.controller.BaseController;
 import cn.hhfarcry.springbootmybatis.common.base.utils.EntityUtil;
 import cn.hhfarcry.springbootmybatis.common.base.utils.ParamUtils;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-16 11:20
@@ -34,11 +35,18 @@ public class RoleController extends BaseController {
     @Autowired
     private IRoleService roleService;
 
-
+    /**
+     * 新增或编辑角色
+     * @param roleEntity
+     * @return
+     */
     @RequestMapping(value = "/save" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public ResponseVO save(@RequestBody RoleEntity roleEntity){
         try {
+            if(ParamUtils.isBlank(roleEntity.getRoleName())){
+                return new ResponseVO(ResponseVO.MESSAGE_LAKE_PARAMETER);
+            }
             return new ResponseVO(roleService.insertRole(roleEntity));
         } catch (Exception e) {
             logger.error("controller error at {} --> {}", this.getClass().getName(), e);
@@ -47,6 +55,12 @@ public class RoleController extends BaseController {
     }
 
 
+    /**
+     * 角色查询
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/getpage" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public ResponseVO getPage(HttpServletRequest request, HttpServletResponse response){
@@ -59,6 +73,12 @@ public class RoleController extends BaseController {
         }
     }
 
+    /**
+     * 绑定角色资源
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/bindroleResources" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public ResponseVO bindroleResources(HttpServletRequest request, HttpServletResponse response){
@@ -66,6 +86,9 @@ public class RoleController extends BaseController {
             String roleId = request.getParameter("roleId");
             String resourceIds = request.getParameter("resourceIds");
             List<String> resourceIdsstr = ParamUtils.strTListstr(resourceIds,",");
+            if(ParamUtils.isBlank(resourceIdsstr) || ParamUtils.isBlank(ParamUtils.strTIntger(roleId))){
+                return new ResponseVO(ResponseVO.MESSAGE_LAKE_PARAMETER);
+            }
             return new ResponseVO(roleService.bindroleResources(roleId,resourceIdsstr));
         } catch (Exception e) {
             logger.error("controller error at {} --> {}", this.getClass().getName(), e);
@@ -73,13 +96,21 @@ public class RoleController extends BaseController {
         }
     }
 
-
+    /**
+     * 根据用户id获取角色列表
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/getRolesByUserId" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public ResponseVO getRolesByUserId(HttpServletRequest request, HttpServletResponse response){
         try {
             String userId = request.getParameter("userId");
-            return new ResponseVO(roleService.getRolesByUserId(ParamUtils.strTIntger(userId)));
+            if(ParamUtils.isBlank(ParamUtils.strTIntger(userId))){
+                return new ResponseVO(ResponseVO.MESSAGE_LAKE_PARAMETER);
+            }
+            return new ResponseVO(roleService.getRolesByUserId(userId));
         } catch (Exception e) {
             logger.error("controller error at {} --> {}", this.getClass().getName(), e);
             return new ResponseVO(ResponseVO.MESSAGE_SYSTEM_ERROR);

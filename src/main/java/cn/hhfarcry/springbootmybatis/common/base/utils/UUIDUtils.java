@@ -3,7 +3,7 @@ package cn.hhfarcry.springbootmybatis.common.base.utils;
 import java.util.UUID;
 
 /**
- * @program: springbootmybatis
+ * @program: emsog
  * @description: ${description}
  * @author: huanghong
  * @date: 2019-01-14 15:34
