@@ -5,7 +5,7 @@
     <sql id="allcolumn">
         id
         ,is_deleted
-        ,status
+
         ,comment
         ,create_user_uuid
         ,create_time
@@ -17,7 +17,6 @@
     <sql id="allcolumn2">
         #{id}
         ,#{isDeleted}
-        ,#{status}
         ,#{comment}
         ,#{createUserUuid}
         ,#{createTime}
@@ -34,9 +33,7 @@
             <if test=" id != null  ">
                 and id = #{id}
             </if>
-            <if test=" status != null ">
-                and status = #{status}
-            </if>
+
             <if test=" roleName != null and roleName != '' ">
                 and role_name = #{roleName}
             </if>
@@ -56,7 +53,7 @@
         insert into t_role
         (id
         ,is_deleted
-        ,status
+
         ,comment
         ,create_user_uuid
         ,create_time
@@ -64,7 +61,6 @@
         values
         (#{id}
         ,#{isDeleted}
-        ,#{status}
         ,#{comment}
         ,#{createUserUuid}
         ,#{createTime}
@@ -79,7 +75,6 @@
         select
         role.id
         ,role.is_deleted
-        ,role.status
         ,role.comment
         ,role.create_user_uuid
         ,role.create_time

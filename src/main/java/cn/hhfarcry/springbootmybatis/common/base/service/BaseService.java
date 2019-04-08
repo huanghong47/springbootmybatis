@@ -18,13 +18,11 @@ import java.util.Map;
 
 /**
  * @program: springbootmybatis
- * @description: ${description}
+ * @description: 业务层通用方法
  * @author: huanghong
  * @date: 2019-01-10 11:09
  */
 public class BaseService <E extends BaseEntity>{
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     protected BaseDao baseDao;
 
@@ -44,7 +42,7 @@ public class BaseService <E extends BaseEntity>{
     }
 
     /**
-     * 设置操作用户,只有在做增删改时才调该方法,新增时baseEntity是new过的，删和改时baseEntity是数据库的数据
+     * 设置操作用户
      * @param baseEntity
      */
     public void buildUser(BaseEntity baseEntity){
@@ -52,20 +50,19 @@ public class BaseService <E extends BaseEntity>{
             return;
         }else{
             UserEntity user = service.getUser();
-
             if(ParamUtils.isBlank(baseEntity.getId())){
-                if(ParamUtils.isBlank(baseEntity.getIsDeleted())){
-                    baseEntity.setIsDeleted(0);
+                if(ParamUtils.isBlank(baseEntity.getIsdeleted())){
+                    baseEntity.setIsdeleted(1);
                 }
-                if(ParamUtils.isBlank(baseEntity.getCreateTime())){
-                    baseEntity.setCreateTime(new Date());
+                if(ParamUtils.isBlank(baseEntity.getCreatetime())){
+                    baseEntity.setCreatetime(new Date());
                 }
-                if(ParamUtils.isBlank(baseEntity.getCreateUserId())){
-                    baseEntity.setCreateUserId(ParamUtils.isBlank(user)?0:user.getId());
+                if(ParamUtils.isBlank(baseEntity.getCreateuserid())){
+                    baseEntity.setCreateuserid(ParamUtils.isBlank(user)?-1:user.getId());
                 }
             }else{
-                baseEntity.setUpdateTime(new Date());
-                baseEntity.setUpdateUserId(ParamUtils.isBlank(user)?0:user.getId());
+                baseEntity.setUpdatetime(new Date());
+                baseEntity.setUpdateuserid(ParamUtils.isBlank(user)?-1:user.getId());
             }
         }
     }

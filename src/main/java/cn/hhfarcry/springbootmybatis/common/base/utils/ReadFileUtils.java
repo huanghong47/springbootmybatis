@@ -1,7 +1,5 @@
 package cn.hhfarcry.springbootmybatis.common.base.utils;
 
-import java.io.File;
-
 /**
  * @program: springbootmybatis
  * @description: 读取文件类

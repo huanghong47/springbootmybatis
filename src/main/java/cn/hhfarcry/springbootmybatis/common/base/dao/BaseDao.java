@@ -1,7 +1,6 @@
 package cn.hhfarcry.springbootmybatis.common.base.dao;
 
 import cn.hhfarcry.springbootmybatis.common.base.entity.BaseEntity;
-import cn.hhfarcry.springbootmybatis.common.base.entity.BaseEntity2;
 
 import java.util.List;
 import java.util.Map;
@@ -43,7 +42,7 @@ public interface BaseDao <E extends BaseEntity>{
      * @param entitys
      * @return
      */
-    int insertByEntityBatch(List<E>entitys);
+    int insertByEntityBatch(List<E> entitys);
 
 
     /**

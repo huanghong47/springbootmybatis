@@ -5,7 +5,7 @@
     <sql id="allcolumn">
         id
         ,is_deleted
-        ,status
+
         ,comment
         ,create_user_uuid
         ,create_time
@@ -19,7 +19,6 @@
     <sql id="allcolumn2">
         #{id}
         ,#{isDeleted}
-        ,#{status}
         ,#{comment}
         ,#{createUserUuid}
         ,#{createTime}
@@ -38,9 +37,7 @@
             <if test=" id != null  ">
                 and id = #{id}
             </if>
-            <if test=" status != null ">
-                and status = #{status}
-            </if>
+
             <if test=" resourceName != null and resourceName != '' ">
                 and resource_name = #{resourceName}
             </if>
@@ -64,7 +61,7 @@
         insert into t_resource
         (id
         ,is_deleted
-        ,status
+
         ,comment
         ,create_user_uuid
         ,create_time
@@ -74,7 +71,6 @@
         values
         (#{id}
         ,#{isDeleted}
-        ,#{status}
         ,#{comment}
         ,#{createUserUuid}
         ,#{createTime}
@@ -93,7 +89,6 @@
         select
             resource.id
             ,resource.is_deleted
-            ,resource.status
             ,resource.comment
             ,resource.create_user_uuid
             ,resource.create_time
@@ -112,7 +107,6 @@
         select
             resource.id
             ,resource.is_deleted
-            ,resource.status
             ,resource.comment
             ,resource.create_user_uuid
             ,resource.create_time

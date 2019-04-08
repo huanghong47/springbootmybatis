@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hhfarcry.springbootmybatis.example.dao.StudentDao">
+    <sql id="allcolumn">
+        id
+        ,is_deleted
+        ,comment
+        ,create_user_id
+        ,create_time
+        ,update_user_id
+        ,update_time
+        ,name
+        ,phone
+    </sql>
+
+    <sql id="allcolumn2">
+        #{id}
+        ,#{isDeleted}
+        ,#{comment}
+        ,#{createUserId}
+        ,#{createTime}
+        ,#{updateUserId}
+        ,#{updateTime}
+        ,#{name}
+        ,#{phone}
+    </sql>
+
+    <insert id="insertByEntity" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.example.entity.StudentEntity">
+        insert into t_student
+        (is_deleted
+        ,comment
+        ,create_user_id
+        ,create_time
+        )
+        values
+        (#{isDeleted}
+        ,#{comment}
+        ,#{createUserId}
+        ,#{createTime}
+        )
+    </insert>
+
+    <update id="updateByEntity" parameterType="cn.hhfarcry.springbootmybatis.example.entity.StudentEntity">
+        update t_student
+        <trim prefix="set" suffixOverrides=",">
+            <if test=" comment != null and comment != ''">
+                comment = #{comment},
+            </if>
+            <if test=" updateUserId != null">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test=" updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <insert id="insertOrUpdateByEntity" parameterType="cn.hhfarcry.springbootmybatis.example.entity.StudentEntity">
+        insert into t_student
+        (id
+        ,is_deleted
+        ,comment
+        ,create_user_id
+        ,create_time
+        ,name
+        ,phone
+        )
+        values
+        (#{id}
+        ,#{isDeleted}
+        ,#{comment}
+        ,#{createUserId}
+        ,#{createTime}
+        ,#{name}
+        ,#{phone}
+        )
+        on duplicate key update
+		    update_user_id = #{updateUserId}
+		    ,update_time = current_timestamp
+		    ,comment = #{comment}
+		    ,name = #{name}
+        ,phone = #{phone}
+    </insert>
+
+    <insert id="insertByEntityBatch" parameterType="list">
+        insert into t_student
+        (is_deleted
+        ,comment
+        ,create_user_id
+        ,create_time
+        ,update_user_id
+        ,update_time)
+        values
+        <foreach collection="list" item="i" separator="," open="(" close=")">
+            #{i.isDeleted}
+            ,#{i.comment}
+            ,#{i.createUserId}
+            ,#{i.createTime}
+            ,#{i.updateUserId}
+            ,#{i.updateTime}
+        </foreach>
+    </insert>
+    
+    <select id="selectByEntity" resultType="cn.hhfarcry.springbootmybatis.example.entity.StudentEntity" parameterType="map">
+        select <include refid="allcolumn"></include>
+        from t_student
+        <where>
+                and is_deleted = 0
+            <if test=" id != null ">
+                and id = #{id}
+            </if>
+            <!--<if test=" entName != null and entName != '' ">-->
+                <!--and ent_name like CONCAT('%' , #{entName} , '%')-->
+            <!--</if>-->
+        </where>
+    </select>
+
+    <select id="getOne" resultType="cn.hhfarcry.springbootmybatis.example.entity.StudentEntity" parameterType="java.lang.Integer">
+        select <include refid="allcolumn"></include> from t_student where id = #{0} and is_deleted = 0
+    </select>
+
+    <update id="softDeleteBatch" parameterType="java.util.List">
+        update  t_student set is_deleted = -1 where id in
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+
+    <delete id="hardDeleteBatch" parameterType="java.util.List">
+        delete from  t_student  where id in
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

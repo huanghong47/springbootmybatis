@@ -5,7 +5,7 @@
     <sql id="allcolumn">
         id
         ,is_deleted
-        ,status
+        
         ,comment
         ,create_user_uuid
         ,create_time
@@ -19,11 +19,10 @@
     <sql id="allcolumn2">
         #{id}
         ,#{isDeleted}
-        ,#{status}
         ,#{comment}
-        ,#{createUserUuid}
+        ,#{createUserId}
         ,#{createTime}
-        ,#{updateUserUuid}
+        ,#{updateUserId}
         ,#{updateTime}
         ,#{userName}
         ,#{password}
@@ -34,7 +33,7 @@
         insert into t_user
         (id
         ,is_deleted
-        ,status
+        
         ,comment
         ,create_user_uuid
         ,create_time
@@ -44,15 +43,14 @@
         values
         (#{id}
         ,#{isDeleted}
-        ,#{status}
         ,#{comment}
-        ,#{createUserUuid}
+        ,#{createUserId}
         ,#{createTime}
         ,#{userName}
         ,#{password}
         ,#{phone})
         on duplicate key update
-        update_user_uuid = #{updateUserUuid}
+        update_user_uuid = #{updateUserId}
         ,update_time = current_timestamp
         ,user_name = #{userName}
         ,password = #{password}
@@ -63,8 +61,8 @@
     <update id="updateByEntity" parameterType="cn.hhfarcry.springbootmybatis.example.entity.UserEntity">
         update t_user
         <trim prefix="set" suffixOverrides=",">
-            <if test=" updateUserUuid != null">
-                update_user_uuid = #{updateUserUuid},
+            <if test=" updateUserId != null">
+                update_user_uuid = #{updateUserId},
             </if>
             <if test=" updateTime != null">
                 update_time = #{updateTime},
@@ -90,9 +88,6 @@
             <if test=" id != null ">
                 and id = #{id}
             </if>
-            <if test=" status != null ">
-                and status = #{status}
-            </if>
             <if test=" userName != null and userName != '' ">
                 and user_name = #{userName}
             </if>
@@ -115,7 +110,7 @@
     <insert id="insertByEntity" useGeneratedKeys="true" keyProperty="id" parameterType="cn.hhfarcry.springbootmybatis.example.entity.UserEntity">
         insert into t_user
         (is_deleted
-        ,status
+        
         ,comment
         ,create_user_uuid
         ,create_time
@@ -124,9 +119,8 @@
         ,phone)
         values
         (#{isDeleted}
-        ,#{status}
         ,#{comment}
-        ,#{createUserUuid}
+        ,#{createUserId}
         ,#{createTime}
         ,#{userName}
         ,#{password}

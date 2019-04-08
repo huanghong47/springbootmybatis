@@ -84,7 +84,7 @@
         ,update_user_uuid
         ,update_time)
         values
-        <foreach collection="list" item="i" separator="," open="(",close=")">
+        <foreach collection="list" item="i" separator="," open="(" close=")">
             #{i.isDeleted}
             ,#{i.comment}
             ,#{i.createUserUuid}

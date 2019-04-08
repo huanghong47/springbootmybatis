@@ -3,7 +3,6 @@ package cn.hhfarcry.springbootmybatis.common.base.vo;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.CollectionUtils;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
